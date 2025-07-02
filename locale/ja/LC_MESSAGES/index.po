@@ -1,0 +1,128 @@
+# DICOM Store SCP for AWS HealthImaging Documentation - Japanese Translation
+# Copyright (C) 2024, AWS Marketplace
+# This file is distributed under the same license as the DICOM Store SCP package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DICOM Store SCP 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 12:00+0000\n"
+"PO-Revision-Date: 2024-01-01 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Japanese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+
+#: ../../source/index.rst:1
+msgid "DICOM Store SCP for AWS HealthImaging Documentation"
+msgstr "DICOM Store SCP for AWS HealthImaging ドキュメント"
+
+#: ../../source/index.rst:4
+msgid "Welcome to the DICOM Store SCP for AWS HealthImaging documentation. This solution provides a fully serverless DICOM SCP (Service Class Provider) for efficiently receiving DICOM images and automatically importing them to AWS HealthImaging."
+msgstr "DICOM Store SCP for AWS HealthImaging ドキュメントへようこそ。このソリューションは、DICOM画像を効率的に受信し、AWS HealthImagingに自動的にインポートする完全サーバーレスのDICOM SCP（Service Class Provider）を提供します。"
+
+#: ../../source/index.rst:15
+msgid "Key Features"
+msgstr "主要機能"
+
+#: ../../source/index.rst:17
+msgid "🏥 **DICOM Compliance**"
+msgstr "🏥 **DICOM対応**"
+
+#: ../../source/index.rst:18
+msgid "DICOM SCP (Service Class Provider) server"
+msgstr "DICOM SCP（Service Class Provider）サーバー"
+
+#: ../../source/index.rst:19
+msgid "Support for standard DICOM communication protocols"
+msgstr "標準的なDICOM通信プロトコルをサポート"
+
+#: ../../source/index.rst:20
+msgid "Customizable AE Title configuration"
+msgstr "カスタマイズ可能なAE Title設定"
+
+#: ../../source/index.rst:22
+msgid "☁️ **AWS HealthImaging Integration**"
+msgstr "☁️ **AWS HealthImaging統合**"
+
+#: ../../source/index.rst:23
+msgid "Complete integration with AWS HealthImaging datastore"
+msgstr "AWS HealthImagingデータストアとの完全統合"
+
+#: ../../source/index.rst:24
+msgid "Automated DICOM import processing"
+msgstr "自動的なDICOMインポート処理"
+
+#: ../../source/index.rst:25
+msgid "High availability and scalability"
+msgstr "高可用性とスケーラビリティ"
+
+#: ../../source/index.rst:27
+msgid "🔧 **Full Automation**"
+msgstr "🔧 **完全自動化**"
+
+#: ../../source/index.rst:28
+msgid "Workflow automation with Step Functions"
+msgstr "Step Functionsによるワークフロー自動化"
+
+#: ../../source/index.rst:29
+msgid "Optimized processing with Lambda functions"
+msgstr "Lambda関数による処理の最適化"
+
+#: ../../source/index.rst:30
+msgid "Metadata management with DynamoDB"
+msgstr "DynamoDBによるメタデータ管理"
+
+#: ../../source/index.rst:32
+msgid "🛡️ **Security**"
+msgstr "🛡️ **セキュリティ**"
+
+#: ../../source/index.rst:33
+msgid "Secure communication within VPC"
+msgstr "VPC内での安全な通信"
+
+#: ../../source/index.rst:34
+msgid "TLS encryption support"
+msgstr "TLS暗号化対応"
+
+#: ../../source/index.rst:35
+msgid "Fine-grained access control"
+msgstr "きめ細かいアクセス制御"
+
+#: ../../source/index.rst:37
+msgid "Quick Start"
+msgstr "クイックスタート"
+
+#: ../../source/index.rst:40
+msgid "1. **Subscribe on AWS Marketplace**"
+msgstr "1. **AWS Marketplaceで購読**"
+
+#: ../../source/index.rst:41
+msgid "Search for \"DICOM Store SCP\" and subscribe to the product."
+msgstr "「DICOM Store SCP」を検索して製品を購読してください。"
+
+#: ../../source/index.rst:43
+msgid "2. **Deploy with CloudFormation**"
+msgstr "2. **CloudFormationでデプロイ**"
+
+#: ../../source/index.rst:44
+msgid "Configure parameters and create the stack."
+msgstr "パラメータを設定してスタックを作成してください。"
+
+#: ../../source/index.rst:46
+msgid "3. **Configure DICOM Clients**"
+msgstr "3. **DICOMクライアントの設定**"
+
+#: ../../source/index.rst:47
+msgid "Use the provided endpoint information to connect your DICOM devices."
+msgstr "提供されたエンドポイント情報を使用してDICOM機器を接続してください。"
+
+#: ../../source/index.rst:49
+msgid "Support"
+msgstr "サポート"
+
+#: ../../source/index.rst:52
+msgid "For technical support, please submit requests through AWS Marketplace."
+msgstr "技術サポートについては、AWS Marketplaceを通じてリクエストを送信してください。"
