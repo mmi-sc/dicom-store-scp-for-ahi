@@ -66,8 +66,8 @@ ECS Fargate PACS Server
 
 **Container Specifications:**
 - Base image: Custom DICOM SCP application
-- CPU: 1024-4096 units (configurable)
-- Memory: 2048-8192 MiB (configurable)
+- CPU: 1024-4096 units (configurable via TaskCPU parameter)
+- Memory: 2048-8192 MiB (configurable via TaskMemoryLimit parameter)
 - Network: VPC with private subnets
 
 **DICOM SCP Capabilities:**

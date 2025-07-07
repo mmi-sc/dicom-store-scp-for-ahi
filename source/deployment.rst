@@ -249,6 +249,75 @@ CloudFormation automatically creates and configures AWS resources. Complex syste
 .. note::
    **AE Title (Application Entity Title)** is a name to identify DICOM devices. Each device (CT, MRI, etc.) in the hospital has a unique identifier.
 
+**Optional Parameters - Performance Configuration**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 30 20 30
+
+   * - Parameter
+     - Description
+     - Default Value
+     - Recommended Value
+   * - TaskCPU
+     - CPU units for ECS task
+     - 1024
+     - 2048
+   * - TaskMemoryLimit
+     - Memory limit for ECS task (MiB)
+     - 2048
+     - 4096
+   * - TaskDesiredCount
+     - Desired number of ECS tasks
+     - 1
+     - 2
+   * - AutoscaleMaxCapacity
+     - Maximum capacity for autoscaling
+     - 3
+     - 5
+
+**Optional Parameters - Security Configuration**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 30 20 30
+
+   * - Parameter
+     - Description
+     - Default Value
+     - Example
+   * - TLSCertificateARN
+     - TLS certificate ARN (optional)
+     - ""
+     - arn:aws:acm:us-east-1:123456789012:certificate/xxxxxxxx
+
+**Optional Parameters - Advanced DICOM Configuration**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 30 20 30
+
+   * - Parameter
+     - Description
+     - Default Value
+     - Recommended Value
+   * - DIMSETimeout
+     - DIMSE timeout in seconds
+     - 60
+     - 60
+   * - MaximumAssociations
+     - Maximum concurrent associations
+     - 300
+     - 300
+   * - NetworkTimeout
+     - Network timeout in seconds
+     - 90
+     - 90
+   * - SupportedSOPClassUIDs
+     - Supported SOP Class UIDs (comma-separated)
+     - ""
+     - Set when restricting to specific UIDs
+
 Step 4: Execute Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -121,6 +121,14 @@ Performance Configuration
      - Description
      - Default Value
      - Recommended
+   * - TaskCPU
+     - CPU units for ECS task
+     - 1024
+     - 2048
+   * - TaskMemoryLimit
+     - Memory limit for ECS task (MiB)
+     - 2048
+     - 4096
    * - TaskDesiredCount
      - Desired number of ECS tasks
      - 1
