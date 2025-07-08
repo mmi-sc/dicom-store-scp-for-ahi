@@ -167,7 +167,7 @@ After deployment completion, retrieve connection information from CloudFormation
 
 .. code-block:: text
 
-   NetworkLoadBalancerDNS: cloudpacs-nlb-xxxxxxxxx.elb.us-east-1.amazonaws.com
+   NetworkLoadBalancerDNS: PacsNLB-1234567890.elb.us-east-1.amazonaws.com
    DICOMPort: 11112
    DICOMAETitle: STORESCP
 
@@ -178,7 +178,7 @@ Configure your DICOM clients with the retrieved information:
 
 .. code-block:: text
 
-   Host: cloudpacs-nlb-xxxxxxxxx.elb.us-east-1.amazonaws.com
+   Host: PacsNLB-1234567890.elb.us-east-1.amazonaws.com
    Port: 11112
    Called AE Title: STORESCP
    Calling AE Title: WORKSTATION1
@@ -191,7 +191,7 @@ Test the connection using DICOM tools:
 .. code-block:: bash
 
    # Example using dcmtk
-   echoscu -aec STORESCP -aet WORKSTATION1 cloudpacs-nlb-xxxxxxxxx.elb.us-east-1.amazonaws.com 11112
+   echoscu -aec STORESCP -aet WORKSTATION1 PacsNLB-1234567890.elb.us-east-1.amazonaws.com 11112
 
 Usage
 -----

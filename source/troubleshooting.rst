@@ -89,7 +89,7 @@ DICOM Connection Timeout
 .. code-block:: bash
 
    # Windows
-   telnet storescp-nlb-1234567890.elb.us-east-1.amazonaws.com 11112
+   telnet PacsNLB-1234567890.elb.us-east-1.amazonaws.com 11112
    
    # Success: Black screen appears
    # Failure: Connection timeout or refused

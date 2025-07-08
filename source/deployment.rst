@@ -384,7 +384,7 @@ Retrieve Connection Information
 
 .. code-block:: text
 
-   NetworkLoadBalancerDNS: storescp-nlb-1234567890.elb.us-east-1.amazonaws.com
+   NetworkLoadBalancerDNS: PacsNLB-1234567890.elb.us-east-1.amazonaws.com
    DICOMPort: 11112
    DICOMAETitle: STORESCP
 
@@ -423,7 +423,7 @@ CT, MRI, X-ray, ultrasound diagnostic equipment, and other devices that generate
 
 .. code-block:: text
 
-   Host: storescp-nlb-1234567890.elb.us-east-1.amazonaws.com
+   Host: PacsNLB-1234567890.elb.us-east-1.amazonaws.com
    Port: 11112
    Called AE Title: STORESCP
    Calling AE Title: CT01  # Source device identifier
@@ -479,10 +479,10 @@ Verify that DICOM connection works properly before sending actual medical images
 .. code-block:: bash
 
    # Basic Echo Test
-   echoscu -aec STORESCP -aet TESTCLIENT storescp-nlb-1234567890.elb.us-east-1.amazonaws.com 11112
+   echoscu -aec STORESCP -aet TESTCLIENT PacsNLB-1234567890.elb.us-east-1.amazonaws.com 11112
 
    # Detailed Log Test
-   echoscu -v -aec STORESCP -aet TESTCLIENT storescp-nlb-1234567890.elb.us-east-1.amazonaws.com 11112
+   echoscu -v -aec STORESCP -aet TESTCLIENT PacsNLB-1234567890.elb.us-east-1.amazonaws.com 11112
 
 **Success Display Example:**
 
