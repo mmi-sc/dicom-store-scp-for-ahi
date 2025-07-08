@@ -89,8 +89,8 @@ S3 Storage Buckets
 **Results Storage Bucket:**
 - Stores processing results and metadata
 - Long-term retention for audit purposes
-- Cross-region replication (optional)
-- Versioning enabled for data protection
+- Server-side encryption enabled
+- Public access blocked
 
 Step Functions Workflow
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -332,20 +332,19 @@ High Availability Design
 **Multi-AZ Deployment:**
 - ECS tasks distributed across AZs
 - NLB with cross-zone load balancing
-- S3 cross-region replication (optional)
-- DynamoDB global tables (optional)
-
-**Backup and Recovery:**
-- Automated S3 backups
+- S3 encryption and access controls
 - DynamoDB point-in-time recovery
+
+**Data Protection:**
+- S3 server-side encryption
+- DynamoDB point-in-time recovery enabled
 - CloudFormation stack recreation
 - Infrastructure as Code approach
 
-**Recovery Procedures:**
-- RTO (Recovery Time Objective): < 1 hour
-- RPO (Recovery Point Objective): < 15 minutes
-- Automated failover mechanisms
-- Manual recovery procedures documented
+**High Availability:**
+- Multi-AZ deployment for fault tolerance
+- Automated health checks and failover
+- AWS managed service reliability
 
 Cost Optimization
 -----------------

@@ -389,7 +389,7 @@ Regular Maintenance Tasks
 
 **Quarterly Tasks:**
 
-1. Disaster recovery testing
+1. Data recovery testing
 2. Security configuration review
 3. Performance optimization review
 4. Capacity planning assessment
