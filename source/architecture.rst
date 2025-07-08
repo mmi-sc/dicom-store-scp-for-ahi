@@ -60,7 +60,7 @@ ECS Fargate PACS Server
 
 **Key Features:**
 - Serverless container execution
-- Auto-scaling based on CPU and memory metrics
+- Auto-scaling based on CPU utilization target tracking
 - No infrastructure management required
 - Integrated with AWS CloudWatch for monitoring
 
@@ -299,16 +299,14 @@ Auto Scaling
 ~~~~~~~~~~~~
 
 **ECS Service Auto Scaling:**
-- CPU-based scaling policies
-- Memory-based scaling policies
-- Custom metrics scaling
-- Scheduled scaling for predictable loads
+- CPU-based target tracking scaling policy
 
 **Scaling Metrics:**
-- Target CPU utilization: 70%
-- Target memory utilization: 80%
-- Scale-out cooldown: 300 seconds
-- Scale-in cooldown: 300 seconds
+- Target CPU utilization: 50%
+- Scale-out cooldown: 60 seconds
+- Scale-in cooldown: 60 seconds
+- Min capacity: 1
+- Max capacity: AutoscaleMaxCapacity parameter (default 3, recommended 5)
 
 Performance Optimization
 ~~~~~~~~~~~~~~~~~~~~~~~~

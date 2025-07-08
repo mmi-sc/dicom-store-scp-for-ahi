@@ -250,8 +250,9 @@ Slow Image Processing
 
 .. code-block:: text
 
-   Scale out when: CPU > 70% or Memory > 80%
-   Scale in when: CPU < 30% and Memory < 50%
+   Target tracking: CPU utilization 50%
+   Scale-out/in cooldown: 60 seconds
+   Min capacity: 1, Max capacity: AutoscaleMaxCapacity parameter
 
 **Lambda Function Optimization:**
 
