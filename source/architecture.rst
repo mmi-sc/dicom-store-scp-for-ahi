@@ -274,7 +274,6 @@ CloudWatch Integration
 **Logs:**
 - ECS task logs for DICOM operations
 - Lambda function execution logs
-- Step Functions workflow logs
 - VPC Flow Logs for network analysis
 
 **Alarms:**
