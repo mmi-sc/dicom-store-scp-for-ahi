@@ -469,10 +469,10 @@ Verify that DICOM connection works properly before sending actual medical images
 
 **What is DCMTK**: Free tool for testing DICOM communication
 
-**Installation Method (Windows):**
+**Installation Method:**
 
 1. Download from `DCMTK Official Site <https://dicom.offis.de/dcmtk.php.en>`_
-2. Execute from command prompt after installation
+2. Execute from command line after installation
 
 **Test Command Examples:**
 
