@@ -76,7 +76,7 @@ Security Considerations
 
 - IAM role-based access control
 - Network control with security groups
-- Operation logging with CloudTrail
+- Operation logging with CloudTrail (optional)
 
 **Compliance:**
 
