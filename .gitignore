@@ -1,0 +1,40 @@
+# Sphinx build outputs
+docs/build/
+docs/_build/
+
+# Sphinx cache
+docs/source/.doctrees/
+docs/.doctrees/
+
+# Generated files
+docs/source/modules.rst
+docs/source/api/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+
+# Log files
+*.log
