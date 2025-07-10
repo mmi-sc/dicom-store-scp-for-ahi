@@ -1,57 +1,71 @@
 DICOM Store SCP for AWS HealthImaging Documentation
-====================================================
+==================================================
 
-Welcome to the DICOM Store SCP for AWS HealthImaging documentation. This solution provides a fully serverless DICOM SCP (Service Class Provider) for efficiently receiving DICOM images and automatically importing them to AWS HealthImaging.
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   overview
-   marketplace
-   deployment
-   architecture
-   troubleshooting
-
-Key Features
-------------
-
-🏥 **DICOM Compliance**
-   - DICOM SCP (Service Class Provider) server
-   - Support for standard DICOM communication protocols
-   - Customizable AE Title configuration
-
-☁️ **AWS HealthImaging Integration**
-   - Complete integration with AWS HealthImaging datastore
-   - Automated DICOM import processing
-   - High availability and scalability
-
-🔧 **Full Automation**
-   - Workflow automation with Step Functions
-   - Optimized processing with Lambda functions
-   - Metadata management with DynamoDB
-
-🛡️ **Security**
-   - Secure communication within VPC
-   - TLS encryption support
-   - Fine-grained access control
+CloudPacs is a fully serverless PACS (Picture Archiving and Communication System) deployment powered by AWS CDK. It includes a DICOM SCP server, HealthImaging Datastore, Import Job automation, and supporting infrastructure components such as Lambda, DynamoDB, and Step Functions.
 
 Quick Start
 -----------
 
-1. **Subscribe on AWS Marketplace**
-   Search for "DICOM Store SCP" and subscribe to the product.
+1. **Create Python Virtual Environment**
 
-2. **Deploy with CloudFormation**
-   Configure parameters and create the stack.
+   .. code-block:: bash
 
-3. **Configure DICOM Clients**
-   Use the provided endpoint information to connect your DICOM devices.
+      python -m venv .venv
+      source .venv/bin/activate  # Windows: .venv\Scripts\activate.bat
+
+2. **Install Dependencies**
+
+   .. code-block:: bash
+
+      pip install -r requirements.txt
+
+3. **Set Up Environment Variables**
+
+   .. code-block:: bash
+
+      cp .env.template .env
+      # Edit .env as needed
+
+4. **Bootstrap CDK (first-time only)**
+
+   .. code-block:: bash
+
+      cdk bootstrap
+
+5. **Deploy Stack**
+
+   .. code-block:: bash
+
+      cdk deploy
+
+Key Features
+------------
+
+- **DICOM SCP Server**: Fully compliant DICOM Service Class Provider
+- **AWS HealthImaging Integration**: Seamless integration with AWS HealthImaging datastore
+- **Serverless Architecture**: Built on AWS Lambda, ECS Fargate, and Step Functions
+- **Auto Scaling**: Automatic scaling based on workload
+- **Security**: VPC isolation, encryption at rest and in transit
+
+Contents:
+---------
+
+.. toctree::
+   :maxdepth: 2
+
+   overview
+   architecture
+   deployment
+   marketplace
+   troubleshooting
 
 Support
 -------
 
-For technical support, please submit requests through AWS Marketplace.
+For technical support and questions:
+
+- AWS HealthImaging Documentation: https://docs.aws.amazon.com/healthimaging/
+- DICOM Standard Specification: https://www.dicomstandard.org/
 
 Indices and tables
 ==================

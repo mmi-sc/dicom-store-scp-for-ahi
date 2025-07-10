@@ -4,7 +4,7 @@ Product Overview
 What is DICOM Store SCP for AWS HealthImaging?
 -----------------------------------------------
 
-DICOM Store SCP for AWS HealthImaging (StoreSCP) is a solution for securely managing medical DICOM images in the cloud. It provides healthcare institutions with a cost-effective way to receive DICOM images from medical devices such as CT, MRI, and X-ray systems and automatically store them in AWS HealthImaging.
+DICOM Store SCP for AWS HealthImaging (StoreSCP) is a solution for healthcare institutions to securely and efficiently manage DICOM images from medical devices such as CT, MRI, and X-ray systems in the AWS cloud.
 
 Problems This Solution Addresses
 --------------------------------
@@ -34,27 +34,29 @@ Target Healthcare Organizations
 - **Telemedicine Providers**: Require flexible cloud-based access
 - **Healthcare IT Vendors**: Want to offer cloud PACS solutions to customers
 
-Supported Regions
------------------
-
-- us-east-1 (N. Virginia)
-- us-west-2 (Oregon)
-- eu-west-1 (Ireland)
-- ap-northeast-1 (Tokyo)
-
 Prerequisites
 -------------
 
 - AWS Account
 - Appropriate IAM permissions
 - VPC (existing or new)
-- Public and private subnets
 - NAT Gateway (for ECR access from private subnets)
+
+Supported Regions
+-----------------
+
+Regions where AWS HealthImaging is supported:
+
+- us-east-1 (N. Virginia)
+- us-west-2 (Oregon)
+- eu-west-1 (Ireland)
+- ap-southeast-2 (Sydney)
 
 Pricing
 -------
 
-**AWS Service Costs:**
+AWS Service Costs
+~~~~~~~~~~~~~~~~~
 
 - ECS Fargate: Charged based on execution time
 - AWS HealthImaging: Charged based on storage and API usage
@@ -66,19 +68,22 @@ For detailed cost estimates, use the `AWS Pricing Calculator <https://calculator
 Security Considerations
 -----------------------
 
-**Data Protection:**
+Data Protection
+~~~~~~~~~~~~~~~
 
 - Encryption at rest (S3, DynamoDB)
 - Encryption in transit (TLS support)
 - Communication isolation within VPC
 
-**Access Control:**
+Access Control
+~~~~~~~~~~~~~~
 
 - IAM role-based access control
 - Network control with security groups
 - Operation logging with CloudTrail (optional)
 
-**Compliance:**
+Compliance
+~~~~~~~~~~
 
 - HIPAA-ready design
 - SOC 2 Type II compliant

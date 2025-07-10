@@ -1,7 +1,5 @@
 Architecture Overview
-======================
-
-This section provides a detailed overview of the DICOM Store SCP for AWS HealthImaging architecture, including system components, data flow, and design principles.
+====================
 
 System Architecture
 -------------------
@@ -34,142 +32,129 @@ Core Components
 Network Load Balancer (NLB)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Purpose:**
-- Provides a stable endpoint for DICOM clients
-- Distributes incoming DICOM connections across ECS tasks
-- Handles high-throughput, low-latency connections
+- **Purpose**: Load balancing and health checking for DICOM communication
+- **Features**:
+  
+  - Layer 4 (TCP) load balancing
+  - High availability and scalability
+  - TLS termination support (optional)
 
-**Key Features:**
-- Layer 4 (TCP) load balancing
-- Static IP addresses
-- High availability across multiple AZs
-- Health checks for backend services
-
-**Configuration:**
-- Listens on port 11112 (configurable)
-- Routes traffic to ECS Fargate tasks
-- Supports both public and internal load balancers
+- **Configuration**:
+  
+  - Target: ECS Fargate tasks
+  - Health Check: TCP connection verification
+  - Sticky Sessions: Disabled
 
 ECS Fargate PACS Server
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-**Purpose:**
-- Runs the DICOM SCP server application
-- Receives and processes DICOM images
-- Stores images temporarily in S3 for processing
+- **Purpose**: Execution environment for DICOM SCP server
+- **Features**:
+  
+  - Serverless container execution
+  - Auto-scaling support
+  - Managed infrastructure
 
-**Key Features:**
-- Serverless container execution
-- Auto-scaling based on CPU utilization target tracking
-- No infrastructure management required
-- Integrated with AWS CloudWatch for monitoring
-
-**Container Specifications:**
-- Base image: Custom DICOM SCP application
-- CPU: 1024-4096 units (configurable via TaskCPU parameter)
-- Memory: 2048-8192 MiB (configurable via TaskMemoryLimit parameter)
-- Network: VPC with private subnets
-
-**DICOM SCP Capabilities:**
-- C-STORE SCP implementation
-- Configurable AE Title
-- Support for multiple SOP Classes
-- Association management
-- DIMSE timeout handling
+- **Configuration**:
+  
+  - CPU: Configurable via TASK_CPU parameter
+  - Memory: Configurable via TASK_MEMORY_LIMIT_MIB parameter
+  - Network Mode: awsvpc
 
 S3 Storage Buckets
 ~~~~~~~~~~~~~~~~~~
 
-**DICOM Storage Bucket:**
-- Temporary storage for received DICOM files
-- Triggers Step Functions workflow on object creation
-- Lifecycle policies for automatic cleanup
-- Server-side encryption enabled
+**DICOM Files Bucket**
 
-**Results Storage Bucket:**
-- Stores processing results and metadata
-- Long-term retention for audit purposes
-- Server-side encryption enabled
-- Public access blocked
+- **Purpose**: Temporary storage for received DICOM files
+- **Features**:
+  
+  - Encryption: AES-256 (S3 managed)
+  - Public access: Blocked
+  - SSL enforcement: Enabled
 
-Step Functions Workflow
-~~~~~~~~~~~~~~~~~~~~~~~
+**Results Bucket**
 
-**Purpose:**
-- Orchestrates the DICOM import process
-- Manages error handling and retries
-- Provides visibility into processing status
-
-**Workflow Steps:**
-
-1. **Trigger**: S3 object creation event
-2. **Validation**: Verify DICOM file integrity
-3. **Import Job**: Create AWS HealthImaging import job
-4. **Monitor**: Track import job progress
-5. **Completion**: Update metadata and cleanup
-
-**Error Handling:**
-- Automatic retries with exponential backoff
-- Dead letter queue for failed imports
-- CloudWatch alarms for monitoring failures
-
-Lambda Functions
-~~~~~~~~~~~~~~~~
-
-**Start Import Job Function:**
-- Creates AWS HealthImaging import jobs
-- Validates DICOM file format
-- Updates DynamoDB with job metadata
-
-**Check Import Status Function:**
-- Monitors import job progress
-- Handles job completion and failures
-- Triggers cleanup processes
-
-**Trigger State Machine Function:**
-- Initiates Step Functions workflow
-- Processes S3 event notifications
-- Manages workflow parameters
+- **Purpose**: Storage for HealthImaging output results
+- **Features**:
+  
+  - Processing result metadata
+  - Conversion logs
 
 AWS HealthImaging
 ~~~~~~~~~~~~~~~~~
 
-**Purpose:**
-- Long-term storage and management of medical images
-- DICOM-native cloud storage service
-- Optimized for medical imaging workflows
+- **Purpose**: Long-term storage and management of medical images
+- **Features**:
+  
+  - DICOM standard compliant
+  - High availability and durability
+  - API-based access
 
-**Key Features:**
-- Petabyte-scale storage
-- Sub-second image retrieval
-- Built-in DICOM metadata extraction
-- Integration with medical imaging applications
-
-**Data Organization:**
-- Datastores for logical grouping
-- Image sets for related images
-- Automatic metadata indexing
-- Version control for image updates
+- **Configuration**:
+  
+  - Encryption: AWS managed encryption
+  - Access Control: IAM
+  - Audit Logging: CloudTrail (optional)
 
 DynamoDB Metadata Store
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-**Purpose:**
-- Tracks import job status and metadata
-- Provides fast lookup for processing status
-- Stores audit trail information
+- **Purpose**: Import job metadata management
+- **Table Design**:
 
-**Table Structure:**
-- Partition key: Job ID
-- Sort key: Timestamp
-- Attributes: Status, metadata, error information
-- Global secondary indexes for queries
+.. code-block:: text
 
-**Data Patterns:**
-- Job tracking and status updates
-- Error logging and debugging
-- Performance metrics collection
-- Audit trail maintenance
+   Table: DicomImportJobTable
+   ├── PK: jobId (String)
+   ├── jobStatus (String)
+   ├── submittedAt (String)
+   ├── inputS3Uri (String)
+   ├── outputS3Uri (String)
+   ├── datastoreId (String)
+   ├── dataAccessRoleArn (String)
+   ├── studyDate (String)
+   ├── studyInstanceUID (String)
+   ├── seriesInstanceUID (String)
+   ├── sopInstanceUID (String)
+   ├── endedAt (String)
+   └── message (String)
+
+Lambda Functions
+~~~~~~~~~~~~~~~~
+
+**Trigger Import Function**
+
+- **Trigger**: S3 PUT event
+- **Processing**:
+  
+  - DICOM file validation
+  - Metadata extraction
+  - Step Functions execution start
+
+**Start Import Job Function**
+
+- **Processing**:
+  
+  - HealthImaging Import Job creation
+  - Job information recording in DynamoDB
+  - Job ID return
+
+**Check Status Function**
+
+- **Processing**:
+  
+  - Import Job status check
+  - DynamoDB update
+  - Completion/error determination
+
+Step Functions Workflow
+~~~~~~~~~~~~~~~~~~~~~~~
+
+- **Purpose**: DICOM import process orchestration
+- **Workflow States**:
+  
+  - TriggerImport → StartImportJob → WaitForCompletion → CheckStatus → IsComplete
 
 Data Flow
 ---------
@@ -177,48 +162,29 @@ Data Flow
 DICOM Image Reception Flow
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. **Client Connection:**
-   - DICOM client establishes connection to NLB endpoint
-   - NLB routes connection to available ECS task
-   - ECS task accepts DICOM association
+1. DICOM Client → NLB (TCP:11112)
+2. NLB → ECS Fargate Task
+3. ECS → DICOM Protocol Processing
+4. ECS → S3 Bucket (DICOM Files)
+5. S3 Event → Lambda (Trigger Import)
 
-2. **Image Transmission:**
-   - Client sends DICOM images via C-STORE operations
-   - ECS task validates and stores images in S3
-   - S3 object creation triggers Step Functions workflow
+Import Processing Flow
+~~~~~~~~~~~~~~~~~~~~~~
 
-3. **Processing Workflow:**
-   - Step Functions initiates import job creation
-   - Lambda function creates AWS HealthImaging import job
-   - Import job processes DICOM files asynchronously
-
-4. **Status Monitoring:**
-   - Lambda function monitors import job progress
-   - DynamoDB stores job status and metadata
-   - CloudWatch provides monitoring and alerting
-
-5. **Completion:**
-   - Import job completes successfully
-   - Images available in AWS HealthImaging
-   - Temporary S3 objects cleaned up
+1. Lambda (Trigger) → Step Functions
+2. Step Functions → Lambda (Start Import Job)
+3. Lambda → HealthImaging API
+4. HealthImaging → Processing
+5. Lambda (Check Status) → Status Polling
+6. HealthImaging → S3 (Results)
+7. DynamoDB ← Status Updates
 
 Error Handling and Recovery
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Connection Failures:**
-- NLB health checks detect unhealthy tasks
-- Auto-scaling creates replacement tasks
-- Client connections automatically retry
-
-**Processing Failures:**
-- Step Functions retry failed operations
-- Dead letter queue captures persistent failures
-- CloudWatch alarms notify administrators
-
-**Data Integrity:**
-- DICOM file validation before processing
-- Checksums verify data integrity
-- Audit logs track all operations
+1. Error Detection → CloudWatch Logs
+2. DynamoDB → Error Status Update
+3. Step Functions → Retry Logic
 
 Security Architecture
 ---------------------
@@ -226,70 +192,22 @@ Security Architecture
 Network Security
 ~~~~~~~~~~~~~~~~
 
-**VPC Isolation:**
-- All components deployed within VPC
-- Private subnets for compute resources
-- Public subnets only for load balancer
-
-**Security Groups:**
-- Restrictive inbound rules
-- Principle of least privilege
-- Separate groups for each component
-
-**Network ACLs:**
-- Additional layer of network security
-- Subnet-level traffic control
-- Default deny with explicit allows
+- **VPC Isolation**: Public/Private subnet separation
+- **Security Groups**: Principle of least privilege
+- **NACLs**: Subnet-level control
+- **TLS Encryption**: DICOM communication encryption (optional)
 
 Data Security
 ~~~~~~~~~~~~~
 
-**Encryption at Rest:**
-- S3 buckets with SSE-S3 encryption
-- DynamoDB encryption enabled
-- EBS volumes encrypted
+- **Encryption**:
+  
+  - S3: AES-256 (SSE-S3)
+  - DynamoDB: Default encryption
+  - HealthImaging: AWS managed encryption
 
-**Encryption in Transit:**
-- TLS support for DICOM connections
-- HTTPS for all API communications
-- VPC endpoints for AWS service access
-
-**Access Control:**
-- IAM roles with minimal permissions
-- Service-linked roles for AWS services
-- No long-term credentials stored
-
-Monitoring and Observability
-----------------------------
-
-CloudWatch Integration
-~~~~~~~~~~~~~~~~~~~~~~
-
-**Metrics:**
-- ECS task CPU and memory utilization
-- NLB connection counts and latency
-- Lambda function duration and errors
-- Step Functions execution metrics
-
-**Logs:**
-- ECS task logs for DICOM operations
-- Lambda function execution logs
-- VPC Flow Logs for network analysis
-
-**Alarms:**
-- High CPU/memory utilization
-- Failed import jobs
-- Connection failures
-- Processing delays
-
-Distributed Tracing
-~~~~~~~~~~~~~~~~~~~
-
-**AWS X-Ray Integration:**
-- End-to-end request tracing
-- Performance bottleneck identification
-- Error root cause analysis
-- Service map visualization
+- **Access Logs**: VPC Flow Logs, CloudTrail (optional)
+- **Auditing**: CloudWatch, AWS Config (optional)
 
 Scalability and Performance
 ---------------------------
@@ -297,74 +215,60 @@ Scalability and Performance
 Auto Scaling
 ~~~~~~~~~~~~
 
-**ECS Service Auto Scaling:**
-- CPU-based target tracking scaling policy
-
-**Scaling Metrics:**
-- Target CPU utilization: 50%
-- Scale-out cooldown: 60 seconds
-- Scale-in cooldown: 60 seconds
-- Min capacity: 1
-- Max capacity: AutoscaleMaxCapacity parameter (default 3, recommended 5)
-
-Performance Optimization
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Connection Handling:**
-- Connection pooling and reuse
-- Optimized TCP settings
-- Keep-alive configurations
-- Timeout management
-
-**Processing Efficiency:**
-- Parallel processing of multiple images
-- Batch operations where possible
-- Efficient memory management
-- Optimized I/O operations
-
-Disaster Recovery
------------------
+- **ECS Auto Scaling**: CPU utilization-based (target: 50%)
+- **Lambda**: Automatic scaling (configurable concurrent execution limits)
+- **DynamoDB**: On-demand capacity (PAY_PER_REQUEST)
 
 High Availability Design
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Multi-AZ Deployment:**
-- ECS tasks distributed across AZs
-- NLB with cross-zone load balancing
-- S3 encryption and access controls
-- DynamoDB point-in-time recovery
+- **Multi-AZ**: Distribution across multiple Availability Zones
+- **Health Checks**: Automatic failover with NLB
+- **Data Protection**: S3 encryption and access controls
 
-**Data Protection:**
-- S3 server-side encryption
-- DynamoDB point-in-time recovery enabled
-- CloudFormation stack recreation
-- Infrastructure as Code approach
+Performance Optimization
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-**High Availability:**
-- Multi-AZ deployment for fault tolerance
-- Automated health checks and failover
-- AWS managed service reliability
+**Latency Optimization**
 
-Cost Optimization
------------------
+- **NLB**: Low latency with Layer 4 load balancing and cross-zone load balancing
+- **ECS Tasks**: Distributed across private subnets in multiple AZs
+- **Lambda**: Automatic scaling with configurable memory
 
-Resource Optimization
-~~~~~~~~~~~~~~~~~~~~~
+**Throughput Optimization**
 
-**Right-Sizing:**
-- ECS task sizing based on workload
-- S3 storage class optimization
-- Lambda memory allocation tuning
-- DynamoDB capacity planning
+- **ECS Auto Scaling**: 60-second cooldown for scale-in/scale-out
+- **S3**: Standard performance (transfer acceleration disabled)
+- **DynamoDB**: On-demand capacity for variable workloads
 
-**Cost Monitoring:**
-- AWS Cost Explorer integration
-- Resource tagging for cost allocation
-- Budget alerts and notifications
-- Regular cost optimization reviews
+**Cost Optimization**
 
-**Reserved Capacity:**
-- ECS Savings Plans for predictable workloads
-- S3 storage class transitions
-- DynamoDB reserved capacity
-- Long-term cost planning
+- **S3 Lifecycle**: Configurable retention policies
+- **ECS Fargate**: Pay-per-use pricing model
+- **DynamoDB**: On-demand billing for unpredictable traffic
+
+Monitoring and Observability
+-----------------------------
+
+CloudWatch Integration
+~~~~~~~~~~~~~~~~~~~~~~
+
+- **Metrics**:
+  
+  - ECS: CPU/Memory utilization
+  - NLB: Connection count, response time
+  - Lambda: Execution count, error rate, execution time
+  - Step Functions: Execution status
+
+- **Logs**:
+  
+  - ECS: Application logs
+  - Lambda: Execution logs
+  - VPC: Flow logs
+
+Disaster Recovery
+~~~~~~~~~~~~~~~~~
+
+- **S3**: Cross-region replication (optional)
+- **DynamoDB**: Point-in-time recovery enabled
+- **HealthImaging**: Built-in high availability

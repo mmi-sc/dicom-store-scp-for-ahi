@@ -1,7 +1,33 @@
 Deployment Guide
 ================
 
-This comprehensive deployment guide provides detailed instructions for healthcare professionals to build a DICOM image reception system on AWS.
+About This Guide
+----------------
+
+This guide is a comprehensive deployment manual for healthcare professionals who handle DICOM images and want to build a DICOM image reception system on AWS. Even AWS beginners can safely use this solution by following the detailed step-by-step instructions provided.
+
+What is DICOM Store SCP for AWS HealthImaging?
+-----------------------------------------------
+
+Product Overview
+~~~~~~~~~~~~~~~~
+
+DICOM Store SCP for AWS HealthImaging (StoreSCP) is a solution for securely managing medical DICOM images in the cloud.
+
+**Key Features:**
+
+- **DICOM Image Reception**: Receives medical images from CT, MRI, X-ray, and other devices using standard DICOM protocols
+- **Automatic Cloud Storage**: Automatically stores received images in AWS HealthImaging for long-term preservation
+- **Secure Communication**: Standard security features appropriate for medical data
+- **Scalable**: Automatically adjusts system capacity based on hospital size
+
+Target Users
+~~~~~~~~~~~~
+
+- Healthcare IT administrators
+- Radiology system administrators
+- Organizations considering DICOM image management system implementation
+- Healthcare institutions considering cloud migration
 
 Pre-Deployment Preparation
 --------------------------
@@ -63,13 +89,9 @@ Required Network Configuration
 **NAT Gateway (Required)**
 
 - Purpose: Allows servers in private subnets to access the internet
-- Why Required: DICOM processing servers need to download container images from ECR
+- Why Required: DICOM processing servers need to download container images from ECR (Elastic Container Registry)
 - Deployment: At least one NAT Gateway in one public subnet
 - Critical: System will not start properly without NAT Gateway
-
-**Availability Zones (AZ)**
-
-Physically separated locations of AWS data centers. For disaster recovery, we distribute across different AZs.
 
 How to Check Network Settings
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -77,15 +99,8 @@ How to Check Network Settings
 1. AWS Management Console → VPC
 2. Check existing VPC ID in "VPC" menu
 3. Check public/private subnet IDs in "Subnets" menu
-4. Check "NAT Gateways" menu to verify at least one NAT Gateway is deployed
+4. Check "NAT Gateways" menu to verify at least one NAT Gateway is deployed in a public subnet
 5. Check access control settings in "Security Groups"
-
-**How to Create NAT Gateway if Missing:**
-
-1. VPC Console → "NAT Gateways"
-2. Click "Create NAT Gateway"
-3. Select a public subnet and allocate an Elastic IP
-4. Add route to NAT Gateway in private subnet route tables
 
 Security Requirements
 ~~~~~~~~~~~~~~~~~~~~~
@@ -98,7 +113,7 @@ Firewall functionality on AWS. Controls which IP addresses from within the VPC a
 Security Group Configuration for DICOM Communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**VPC Internal Access Configuration:**
+**VPC Internal Access Configuration Example:**
 
 .. code-block:: text
 
@@ -107,9 +122,7 @@ Security Group Configuration for DICOM Communication
    Source: 10.0.0.0/16 (VPC internal IP address range)
    Description: VPC internal DICOM SCP connection
 
-*Automatically configured by specifying the VpcCIDR parameter.*
-
-**Internet Access Configuration:**
+**Internet Access Configuration Example:**
 
 .. code-block:: text
 
@@ -117,8 +130,6 @@ Security Group Configuration for DICOM Communication
    Port: 11112 (standard DICOM port)
    Source: 203.0.113.0/24 (hospital's global IP address range)
    Description: Internet DICOM SCP connection
-
-*Configured by specifying PeerCIDR1/PeerCIDR2/PeerCIDR3 parameters.*
 
 TLS Certificate (Optional)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -170,13 +181,13 @@ Step 2: Configuration and Deployment
 Step 3: CloudFormation Parameter Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-CloudFormation automatically creates and configures AWS resources. Complex system configurations can be built at once.
+Required Parameters
+^^^^^^^^^^^^^^^^^^^
 
-**Required Parameters - Network Configuration**
+**Network Configuration**
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 30 30 20
 
    * - Parameter
      - Description
@@ -194,10 +205,6 @@ CloudFormation automatically creates and configures AWS resources. Complex syste
      - Private subnet IDs (comma-separated)
      - subnet-aaaaaaaa,subnet-bbbbbbbb
      - VPC Console → "Subnets"
-   * - AvailabilityZones
-     - Availability zones (comma-separated)
-     - us-east-1a,us-east-1b
-     - Check subnet details
    * - SecurityGroupID
      - Security group ID
      - sg-xxxxxxxxx
@@ -207,11 +214,10 @@ CloudFormation automatically creates and configures AWS resources. Complex syste
      - 10.0.0.0/16
      - Check VPC details
 
-**Required Parameters - DICOM Configuration**
+**DICOM Configuration**
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 30 30 20
 
    * - Parameter
      - Description
@@ -237,86 +243,6 @@ CloudFormation automatically creates and configures AWS resources. Complex syste
      - Allowed IP address range 3
      - ""
      - Additional IP range (optional)
-   * - RequireCalledAETitle
-     - Enable AE Title verification
-     - false
-     - Usually false
-   * - RequireCallingAETitle
-     - Allowed client AE Titles
-     - ""
-     - Set when restricting to specific devices
-
-.. note::
-   **AE Title (Application Entity Title)** is a name to identify DICOM devices. Each device (CT, MRI, etc.) in the hospital has a unique identifier.
-
-**Optional Parameters - Performance Configuration**
-
-.. list-table::
-   :header-rows: 1
-   :widths: 20 30 20 30
-
-   * - Parameter
-     - Description
-     - Default Value
-     - Recommended Value
-   * - TaskCPU
-     - CPU units for ECS task
-     - 1024
-     - 2048
-   * - TaskMemoryLimit
-     - Memory limit for ECS task (MiB)
-     - 2048
-     - 4096
-   * - TaskDesiredCount
-     - Desired number of ECS tasks
-     - 1
-     - 2
-   * - AutoscaleMaxCapacity
-     - Maximum capacity for autoscaling
-     - 3
-     - 5
-
-**Optional Parameters - Security Configuration**
-
-.. list-table::
-   :header-rows: 1
-   :widths: 20 30 20 30
-
-   * - Parameter
-     - Description
-     - Default Value
-     - Example
-   * - TLSCertificateARN
-     - TLS certificate ARN (optional)
-     - ""
-     - arn:aws:acm:us-east-1:123456789012:certificate/xxxxxxxx
-
-**Optional Parameters - Advanced DICOM Configuration**
-
-.. list-table::
-   :header-rows: 1
-   :widths: 20 30 20 30
-
-   * - Parameter
-     - Description
-     - Default Value
-     - Recommended Value
-   * - DIMSETimeout
-     - DIMSE timeout in seconds
-     - 60
-     - 60
-   * - MaximumAssociations
-     - Maximum concurrent associations
-     - 300
-     - 300
-   * - NetworkTimeout
-     - Network timeout in seconds
-     - 90
-     - 90
-   * - SupportedSOPClassUIDs
-     - Supported SOP Class UIDs (comma-separated)
-     - ""
-     - Set when restricting to specific UIDs
 
 Step 4: Execute Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -341,46 +267,12 @@ Post-Deployment Configuration
 Retrieve Connection Information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Detailed Steps to Retrieve Connection Information**
+After deployment completion, retrieve connection information using these steps:
 
-**Step 1: Access CloudFormation Console**
-
-1. Log in to AWS Management Console
-2. Select "CloudFormation" from services list
-3. Confirm the region is correct (same as deployment region)
-
-**Step 2: Verify Stack**
-
-1. Find your created stack name in the stack list
-   
-   - Stack name example: "StoreSCP-Stack-20241201"
-   - Confirm status is "CREATE_COMPLETE"
-
-2. Click the stack name to open details
-
-**Step 3: Retrieve Connection Information**
-
-1. Click the **"Outputs"** tab
-2. Note or copy the following important information:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 40 30
-
-   * - Item
-     - Description
-     - Usage
-   * - NetworkLoadBalancerDNS
-     - Server address for connection
-     - DICOM device connection settings
-   * - DICOMPort
-     - Connection port number
-     - DICOM device connection settings
-   * - DICOMAETitle
-     - Server's AE Title
-     - DICOM device connection settings
-
-**Example:**
+1. AWS Management Console → CloudFormation
+2. Select your created stack
+3. Click the **Outputs** tab
+4. Note the following information:
 
 .. code-block:: text
 
@@ -391,117 +283,42 @@ Retrieve Connection Information
 DICOM Device Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**What are DICOM Devices?**
-
-CT, MRI, X-ray, ultrasound diagnostic equipment, and other devices that generate and transmit medical images.
-
-**Connection Configuration Steps**
-
-**General DICOM Device Settings:**
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 40 30
-
-   * - Setting Item
-     - Description
-     - Setting Value
-   * - Host/Server Address
-     - Connection destination server address
-     - NetworkLoadBalancerDNS from CloudFormation Outputs
-   * - Port
-     - Connection port
-     - DICOMPort from CloudFormation Outputs (usually 11112)
-   * - Called AE Title
-     - Destination AE Title
-     - DICOMAETitle from CloudFormation Outputs
-   * - Calling AE Title
-     - Source device AE Title
-     - Device-specific name (e.g., CT01, MRI01)
-
-**Configuration Example:**
+**Connection Settings Example**
 
 .. code-block:: text
 
    Host: PacsNLB-1234567890.elb.us-east-1.amazonaws.com
    Port: 11112
    Called AE Title: STORESCP
-   Calling AE Title: CT01  # Source device identifier
+   Calling AE Title: WORKSTATION1
+
+Connection Testing
+~~~~~~~~~~~~~~~~~~
+
+**DICOM Echo Test**
+
+.. code-block:: bash
+
+   # Example using dcmtk
+   echoscu -aec STORESCP -aet WORKSTATION1 PacsNLB-1234567890.elb.us-east-1.amazonaws.com 11112
 
 Device-Specific Configuration Guide
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**For GE Equipment:**
+**GE Equipment:**
 
 1. Service → Network → DICOM Settings
 2. Enter the above parameters
-3. Verify connection with Connection Test
+3. Connection Test to verify connectivity
 
-**For Siemens Equipment:**
+**Siemens Equipment:**
 
 1. System → Network → DICOM Configuration
 2. Create New Destination
 3. Configure the above parameters
 
-**For Philips Equipment:**
+**Philips Equipment:**
 
 1. Setup → System → Network → DICOM
 2. Add Destination
 3. Enter connection information
-
-Connection Testing
-~~~~~~~~~~~~~~~~~~
-
-**Importance of Connection Testing**
-
-Verify that DICOM connection works properly before sending actual medical images.
-
-**Test Method 1: DICOM Echo Test from Device**
-
-**Steps:**
-
-1. Access DICOM device management screen
-2. Open Network/DICOM settings screen
-3. Execute "Connection Test" or "Echo Test"
-4. Confirm "Success" or "OK" is displayed
-
-**Test Method 2: Using DCMTK Tools (For Technical Staff)**
-
-**What is DCMTK**: Free tool for testing DICOM communication
-
-**Installation Method:**
-
-1. Download from `DCMTK Official Site <https://dicom.offis.de/dcmtk.php.en>`_
-2. Execute from command line after installation
-
-**Test Command Examples:**
-
-.. code-block:: bash
-
-   # Basic Echo Test
-   echoscu -aec STORESCP -aet TESTCLIENT PacsNLB-1234567890.elb.us-east-1.amazonaws.com 11112
-
-   # Detailed Log Test
-   echoscu -v -aec STORESCP -aet TESTCLIENT PacsNLB-1234567890.elb.us-east-1.amazonaws.com 11112
-
-**Success Display Example:**
-
-.. code-block:: text
-
-   I: Association Request Acknowledged (Max Send PDV: 16372)
-   I: Echo Response: 0000H (Success)
-   I: Releasing Association
-
-**Test Method 3: Actual Image Transmission Test**
-
-**Precautions:**
-
-- Use anonymized test images
-- Do not use actual images containing patient information
-
-**Steps:**
-
-1. Select small test image on DICOM device
-2. Set destination to configured StoreSCP
-3. Execute transmission
-4. Verify image is properly saved in AWS HealthImaging

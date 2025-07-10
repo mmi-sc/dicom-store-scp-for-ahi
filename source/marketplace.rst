@@ -1,47 +1,36 @@
 AWS Marketplace Deployment
-==========================
-
-This guide covers deployment from AWS Marketplace and basic configuration.
+===========================
 
 Deployment Steps
 ----------------
 
-Step 1: Subscribe on AWS Marketplace
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Launch from AWS Marketplace
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. **Access AWS Marketplace**
+1. Search for "DICOM Store SCP" or "StoreSCP" in AWS Marketplace
+2. Click "Continue to Subscribe"
+3. Click "Continue to Configuration"
+4. Select region and click "Continue to Launch"
+
+2. Parameter Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Configure required parameters:
    
-   - Log in to AWS Management Console
-   - Navigate to AWS Marketplace
+   - VPC ID
+   - Subnet IDs
+   - Security Group ID
+   - Allowed client CIDRs
 
-2. **Search for StoreSCP**
-   
-   - Enter "DICOM Store SCP" or "StoreSCP" in the search bar
-   - Select the corresponding product
+2. Adjust optional parameters as needed
+3. Click "Launch"
 
-3. **Subscribe**
-   
-   - Click "Continue to Subscribe"
-   - Review and accept terms by clicking "Accept Terms"
-   - Wait for subscription processing to complete
+3. Verify Deployment
+~~~~~~~~~~~~~~~~~~~~
 
-Step 2: Configuration and Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. **Navigate to Configuration**
-   
-   - Click "Continue to Configuration"
-
-2. **Basic Configuration**
-   
-   - **Region**: Select deployment region
-   - **Version**: Select latest version
-   - Click "Continue to Launch"
-
-3. **Launch Configuration**
-   
-   - **Action**: Select "Launch CloudFormation"
-   - Click "Launch"
+- Confirm CloudFormation stack creation completion
+- Verify ECS service is running properly
+- Obtain Network Load Balancer DNS name
 
 Parameter Configuration
 -----------------------
@@ -51,155 +40,104 @@ Network Configuration
 
 .. list-table::
    :header-rows: 1
-   :widths: 25 35 25 15
 
    * - Parameter
      - Description
-     - Example
-     - Required
+     - Default Value
    * - VpcID
      - ID of the VPC to use
-     - vpc-xxxxxxxxx
-     - Yes
+     - \-
    * - PublicSubnetIDs
      - Public subnet IDs (comma-separated)
-     - subnet-xxxxxxxx,subnet-yyyyyyyy
-     - Yes
+     - \-
    * - PrivateSubnetIDs
      - Private subnet IDs (comma-separated)
-     - subnet-aaaaaaaa,subnet-bbbbbbbb
-     - Yes
+     - \-
    * - SecurityGroupID
      - Security group ID for ECS service
-     - sg-xxxxxxxxx
-     - Yes
+     - \-
    * - VpcCIDR
      - CIDR block for the VPC
-     - 10.0.0.0/16
-     - No
+     - \-
 
 DICOM Configuration
 ~~~~~~~~~~~~~~~~~~~
 
 .. list-table::
    :header-rows: 1
-   :widths: 25 35 25 15
 
    * - Parameter
      - Description
      - Default Value
-     - Required
    * - SCPAETitle
      - AE Title for DICOM SCP
      - STORESCP
-     - No
    * - SCPPort
      - DICOM communication port
      - 11112
-     - No
-   * - PeerCIDR1
-     - Allowed client CIDR block 1
-     - 
-     - Yes
-   * - PeerCIDR2
-     - Allowed client CIDR block 2
-     - 
-     - No
-   * - PeerCIDR3
-     - Allowed client CIDR block 3
-     - 
-     - No
+   * - PeerCIDR1-3
+     - Allowed client CIDR blocks
+     - \-
+   * - DIMSETimeout
+     - DIMSE operation timeout (seconds)
+     - 60
+   * - MaximumAssociations
+     - Maximum concurrent connections
+     - 300
 
 Performance Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. list-table::
    :header-rows: 1
-   :widths: 25 35 20 20
 
    * - Parameter
      - Description
      - Default Value
-     - Recommended
    * - TaskCPU
      - CPU units for ECS task
      - 1024
-     - 2048
    * - TaskMemoryLimit
-     - Memory limit for ECS task (MiB)
+     - Memory limit for ECS task
      - 2048
-     - 4096
    * - TaskDesiredCount
      - Desired number of ECS tasks
      - 1
-     - 2
    * - AutoscaleMaxCapacity
-     - Maximum capacity for autoscaling
+     - Maximum autoscaling capacity
      - 3
-     - 5
 
 Security Configuration
 ~~~~~~~~~~~~~~~~~~~~~~
 
 .. list-table::
    :header-rows: 1
-   :widths: 25 45 30
 
    * - Parameter
      - Description
-     - Example
+     - Default Value
    * - TLSCertificateARN
      - TLS certificate ARN (optional)
-     - arn:aws:acm:us-east-1:123456789012:certificate/xxxxxxxx
-
-Post-Deployment Configuration
------------------------------
-
-Retrieve Connection Information
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-After deployment completion, retrieve connection information from CloudFormation Outputs:
-
-1. AWS Management Console → CloudFormation
-2. Select your created stack
-3. Click the **Outputs** tab
-4. Note the following information:
-
-.. code-block:: text
-
-   NetworkLoadBalancerDNS: PacsNLB-1234567890.elb.us-east-1.amazonaws.com
-   DICOMPort: 11112
-   DICOMAETitle: STORESCP
-
-DICOM Client Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Configure your DICOM clients with the retrieved information:
-
-.. code-block:: text
-
-   Host: PacsNLB-1234567890.elb.us-east-1.amazonaws.com
-   Port: 11112
-   Called AE Title: STORESCP
-   Calling AE Title: WORKSTATION1
-
-Connection Testing
-~~~~~~~~~~~~~~~~~~
-
-Test the connection using DICOM tools:
-
-.. code-block:: bash
-
-   # Example using dcmtk
-   echoscu -aec STORESCP -aet WORKSTATION1 PacsNLB-1234567890.elb.us-east-1.amazonaws.com 11112
+     - \-
 
 Usage
 -----
 
+DICOM Client Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the information retrieved from CloudFormation Outputs tab:
+
+.. code-block:: text
+
+   Host: [NetworkLoadBalancerDNS value]
+   Port: [DICOMPort value]
+   AE Title: [DICOMAETitle value]
+
 Image Transmission
 ~~~~~~~~~~~~~~~~~~
 
-1. Connect from DICOM client using the configuration above
+1. Connect from DICOM client using above settings
 2. Send DICOM images using C-STORE operation
 3. Automatic import to AWS HealthImaging begins
 
@@ -215,12 +153,10 @@ Monitoring
 CloudWatch Metrics
 ~~~~~~~~~~~~~~~~~~~
 
-Key metrics to monitor:
-
-- ECS CPU utilization
-- ECS Memory utilization
-- NLB Active connection count
-- Lambda execution count and error rate
+- ECS CPU/Memory utilization
+- Network Load Balancer connection count
+- Lambda function execution count and error rate
+- Step Functions execution status
 
 Recommended Alarms
 ~~~~~~~~~~~~~~~~~~
@@ -231,3 +167,25 @@ Recommended Alarms
    - ECS Memory utilization > 80%
    - Lambda error rate > 5%
    - HealthImaging import errors
+
+Post-Deployment Configuration
+-----------------------------
+
+Retrieve Connection Information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After deployment completion:
+
+1. AWS Management Console → CloudFormation
+2. Select your created stack
+3. Click the **Outputs** tab
+4. Note the connection information
+
+Connection Testing
+~~~~~~~~~~~~~~~~~~
+
+**DICOM Echo Test**
+
+.. code-block:: bash
+
+   echoscu -aec STORESCP -aet WORKSTATION1 [NLB-DNS] 11112
