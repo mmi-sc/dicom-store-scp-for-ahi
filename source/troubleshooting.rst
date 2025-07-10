@@ -86,12 +86,7 @@ DICOM Connection Timeout
 
 **Step 1: Network Connectivity Check**
 
-.. code-block:: bash
-
-   telnet PacsNLB-1234567890.elb.us-east-1.amazonaws.com 11112
-   
-   # Success: Black screen appears
-   # Failure: Connection timeout or refused
+Verify network connectivity using DICOM echo test or check ECS service status directly.
 
 **Step 2: Security Group Verification**
 
