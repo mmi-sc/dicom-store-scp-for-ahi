@@ -3,41 +3,6 @@ DICOM Store SCP for AWS HealthImaging Documentation
 
 CloudPacs is a fully serverless PACS (Picture Archiving and Communication System) deployment powered by AWS CDK. It includes a DICOM SCP server, HealthImaging Datastore, Import Job automation, and supporting infrastructure components such as Lambda, DynamoDB, and Step Functions.
 
-Quick Start
------------
-
-1. **Create Python Virtual Environment**
-
-   .. code-block:: bash
-
-      python -m venv .venv
-      source .venv/bin/activate  # Windows: .venv\Scripts\activate.bat
-
-2. **Install Dependencies**
-
-   .. code-block:: bash
-
-      pip install -r requirements.txt
-
-3. **Set Up Environment Variables**
-
-   .. code-block:: bash
-
-      cp .env.template .env
-      # Edit .env as needed
-
-4. **Bootstrap CDK (first-time only)**
-
-   .. code-block:: bash
-
-      cdk bootstrap
-
-5. **Deploy Stack**
-
-   .. code-block:: bash
-
-      cdk deploy
-
 Key Features
 ------------
 
