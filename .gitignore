@@ -1,14 +1,14 @@
 # Sphinx build outputs
-docs/build/
-docs/_build/
+build/
+_build/
 
 # Sphinx cache
-docs/source/.doctrees/
-docs/.doctrees/
+source/.doctrees/
+.doctrees/
 
 # Generated files
-docs/source/modules.rst
-docs/source/api/
+source/modules.rst
+source/api/
 
 # Python cache
 __pycache__/
