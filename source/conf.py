@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'DICOM Store SCP for AWS HealthImaging'
-copyright = '2024, AWS Marketplace'
-author = 'AWS Marketplace'
+copyright = '2025, Man Machine Interface, Inc.'
+author = 'Tatsuhiko Arai'
 release = '1.0.0'
 
 # -- General configuration ---------------------------------------------------
