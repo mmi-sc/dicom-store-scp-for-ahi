@@ -177,7 +177,6 @@ Private Subnets:
 - **データストア設定**:
   - 暗号化: AWSマネージド暗号化
   - アクセス制御: IAM
-  - 監査ログ: CloudTrail（オプション）
 
 #### S3 Bucket (Results)
 - **目的**: HealthImagingからの出力結果保存
@@ -341,8 +340,8 @@ Private Subnets:
   - S3: AES-256 (SSE-S3)
   - DynamoDB: デフォルト暗号化
   - HealthImaging: AWSマネージド暗号化
-- **アクセスログ**: VPC Flow Logs、CloudTrail（オプション）
-- **監査**: CloudWatch、AWS Config（オプション）
+- **アクセスログ**: VPC Flow Logs
+- **監査**: CloudWatch
 
 ## スケーラビリティ設計
 

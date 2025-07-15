@@ -177,7 +177,6 @@ Private Subnets:
 - **Datastore Configuration**:
   - Encryption: AWS managed encryption
   - Access Control: IAM
-  - Audit Logging: CloudTrail (optional)
 
 #### S3 Bucket (Results)
 - **Purpose**: Storage for HealthImaging output results
@@ -341,8 +340,8 @@ Private Subnets:
   - S3: AES-256 (SSE-S3)
   - DynamoDB: Default encryption
   - HealthImaging: AWS managed encryption
-- **Access Logs**: VPC Flow Logs, CloudTrail (optional)
-- **Auditing**: CloudWatch, AWS Config (optional)
+- **Access Logs**: VPC Flow Logs
+- **Auditing**: CloudWatch
 
 ## Scalability Design
 

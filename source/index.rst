@@ -1,12 +1,12 @@
 DICOM Store SCP for AWS HealthImaging Documentation
-==================================================
+===================================================
 
-CloudPacs is a fully serverless PACS (Picture Archiving and Communication System) deployment powered by AWS CDK. It includes a DICOM SCP server, HealthImaging Datastore, Import Job automation, and supporting infrastructure components such as Lambda, DynamoDB, and Step Functions.
+DICOM Store SCP for AWS HealthImaging (StoreSCP) is a fully serverless PACS (Picture Archiving and Communication System) deployment powered by AWS CloudFormation. It includes a DICOM Store SCP server, HealthImaging Datastore, Import Job automation, and supporting infrastructure components such as Lambda, DynamoDB, and Step Functions.
 
 Key Features
 ------------
 
-- **DICOM SCP Server**: Fully compliant DICOM Service Class Provider
+- **DICOM Store SCP Server**: Fully compliant DICOM Store Service Class Provider
 - **AWS HealthImaging Integration**: Seamless integration with AWS HealthImaging datastore
 - **Serverless Architecture**: Built on AWS Lambda, ECS Fargate, and Step Functions
 - **Auto Scaling**: Automatic scaling based on workload
@@ -19,9 +19,8 @@ Contents:
    :maxdepth: 2
 
    overview
-   architecture
    deployment
-   marketplace
+   architecture
    troubleshooting
 
 Support

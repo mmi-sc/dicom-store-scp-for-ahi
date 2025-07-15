@@ -20,7 +20,7 @@ Problems This Solution Addresses
 **Solutions Provided by StoreSCP:**
 
 - Dramatically reduce initial investment (no hardware required)
-- Pay-as-you-use pricing model for cost optimization
+- Pay-as-you-go pricing model for cost optimization
 - Data protection with AWS's highly reliable infrastructure
 - Unlimited storage capacity with automatic scaling
 - Reduced operational burden through managed services
@@ -80,13 +80,11 @@ Access Control
 
 - IAM role-based access control
 - Network control with security groups
-- Operation logging with CloudTrail (optional)
 
 Compliance
 ~~~~~~~~~~
 
 - HIPAA-ready design
-- SOC 2 Type II compliant
 - Security based on AWS Shared Responsibility Model
 
 .. note::

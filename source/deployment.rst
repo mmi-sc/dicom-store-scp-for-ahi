@@ -6,29 +6,6 @@ About This Guide
 
 This guide is a comprehensive deployment manual for healthcare professionals who handle DICOM images and want to build a DICOM image reception system on AWS. Even AWS beginners can safely use this solution by following the detailed step-by-step instructions provided.
 
-What is DICOM Store SCP for AWS HealthImaging?
------------------------------------------------
-
-Product Overview
-~~~~~~~~~~~~~~~~
-
-DICOM Store SCP for AWS HealthImaging (StoreSCP) is a solution for securely managing medical DICOM images in the cloud.
-
-**Key Features:**
-
-- **DICOM Image Reception**: Receives medical images from CT, MRI, X-ray, and other devices using standard DICOM protocols
-- **Automatic Cloud Storage**: Automatically stores received images in AWS HealthImaging for long-term preservation
-- **Secure Communication**: Standard security features appropriate for medical data
-- **Scalable**: Automatically adjusts system capacity based on hospital size
-
-Target Users
-~~~~~~~~~~~~
-
-- Healthcare IT administrators
-- Radiology system administrators
-- Organizations considering DICOM image management system implementation
-- Healthcare institutions considering cloud migration
-
 Pre-Deployment Preparation
 --------------------------
 
@@ -151,7 +128,7 @@ Step 1: Subscribe on AWS Marketplace
 
 2. **Search for StoreSCP**
    
-   - Enter "DICOM Store SCP" or "StoreSCP" in the search bar
+   - Enter "DICOM Store SCP for AWS HealthImaging" or "StoreSCP" in the search bar
    - Select the corresponding product
 
 3. **Subscribe**
@@ -225,7 +202,7 @@ Required Parameters
      - Recommended Value
    * - SCPAETitle
      - DICOM device identifier
-     - MYHOSPITAL
+     - STORESCP
      - Hospital abbreviation (max 16 chars)
    * - SCPPort
      - DICOM communication port
@@ -300,25 +277,4 @@ Connection Testing
 .. code-block:: bash
 
    # Example using dcmtk
-   echoscu -aec STORESCP -aet WORKSTATION1 PacsNLB-1234567890.elb.us-east-1.amazonaws.com 11112
-
-Device-Specific Configuration Guide
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**GE Equipment:**
-
-1. Service → Network → DICOM Settings
-2. Enter the above parameters
-3. Connection Test to verify connectivity
-
-**Siemens Equipment:**
-
-1. System → Network → DICOM Configuration
-2. Create New Destination
-3. Configure the above parameters
-
-**Philips Equipment:**
-
-1. Setup → System → Network → DICOM
-2. Add Destination
-3. Enter connection information
+   echoscu -v -aec STORESCP -aet WORKSTATION1 PacsNLB-1234567890.elb.us-east-1.amazonaws.com 11112

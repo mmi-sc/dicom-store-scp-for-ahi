@@ -1,5 +1,5 @@
 Architecture Overview
-====================
+=====================
 
 System Architecture
 -------------------
@@ -95,7 +95,6 @@ AWS HealthImaging
   
   - Encryption: AWS managed encryption
   - Access Control: IAM
-  - Audit Logging: CloudTrail (optional)
 
 DynamoDB Metadata Store
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -206,8 +205,8 @@ Data Security
   - DynamoDB: Default encryption
   - HealthImaging: AWS managed encryption
 
-- **Access Logs**: VPC Flow Logs, CloudTrail (optional)
-- **Auditing**: CloudWatch, AWS Config (optional)
+- **Access Logs**: VPC Flow Logs
+- **Auditing**: CloudWatch
 
 Scalability and Performance
 ---------------------------
@@ -265,10 +264,3 @@ CloudWatch Integration
   - ECS: Application logs
   - Lambda: Execution logs
   - VPC: Flow logs
-
-Disaster Recovery
-~~~~~~~~~~~~~~~~~
-
-- **S3**: Cross-region replication (optional)
-- **DynamoDB**: Point-in-time recovery enabled
-- **HealthImaging**: Built-in high availability

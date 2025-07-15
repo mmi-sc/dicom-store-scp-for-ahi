@@ -17,7 +17,7 @@ DICOM Store SCP for AWS HealthImaging (StoreSCP) is a solution for healthcare in
 
 **Solutions Provided by StoreSCP:**
 - Dramatically reduce initial investment (no hardware required)
-- Pay-as-you-use pricing model for cost optimization
+- Pay-as-you-go pricing model for cost optimization
 - Data protection with AWS's highly reliable infrastructure
 - Unlimited storage capacity with automatic scaling
 - Reduced operational burden through managed services
@@ -229,11 +229,9 @@ For detailed cost estimates, use the [AWS Pricing Calculator](https://calculator
 ### Access Control
 - IAM role-based access control
 - Network control with security groups
-- Operation logging with CloudTrail (optional)
 
 ### Compliance
 - HIPAA-ready design
-- SOC 2 Type II compliant
 - Security based on AWS Shared Responsibility Model
 
 ## Version History
