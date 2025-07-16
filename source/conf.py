@@ -30,6 +30,7 @@ exclude_patterns = []
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+html_baseurl = 'https://www.mmi-sc.co.jp/dicom-store-scp-for-ahi/'
 
 # -- Internationalization options --------------------------------------------
 language = 'en'
