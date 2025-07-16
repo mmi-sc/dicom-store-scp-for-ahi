@@ -31,9 +31,4 @@ For technical support and questions:
 - AWS HealthImaging Documentation: https://docs.aws.amazon.com/healthimaging/
 - DICOM Standard Specification: https://www.dicomstandard.org/
 
-Indices and tables
-==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
