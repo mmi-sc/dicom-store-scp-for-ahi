@@ -1,0 +1,222 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Overview &mdash; DICOM Store SCP for AWS HealthImaging 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deployment Guide" href="deployment.html" />
+    <link rel="prev" title="DICOM Store SCP for AWS HealthImaging Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DICOM Store SCP for AWS HealthImaging
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Product Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-dicom-store-scp-for-aws-healthimaging">What is DICOM Store SCP for AWS HealthImaging?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problems-this-solution-addresses">Problems This Solution Addresses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#target-healthcare-organizations">Target Healthcare Organizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-regions">Supported Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pricing">Pricing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aws-service-costs">AWS Service Costs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#security-considerations">Security Considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-protection">Data Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#access-control">Access Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compliance">Compliance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DICOM Store SCP for AWS HealthImaging</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Product Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="product-overview">
+<h1>Product Overview<a class="headerlink" href="#product-overview" title="Link to this heading"></a></h1>
+<section id="what-is-dicom-store-scp-for-aws-healthimaging">
+<h2>What is DICOM Store SCP for AWS HealthImaging?<a class="headerlink" href="#what-is-dicom-store-scp-for-aws-healthimaging" title="Link to this heading"></a></h2>
+<p>DICOM Store SCP for AWS HealthImaging (StoreSCP) is a solution for healthcare institutions to securely and efficiently manage DICOM images from medical devices such as CT, MRI, and X-ray systems in the AWS cloud.</p>
+</section>
+<section id="problems-this-solution-addresses">
+<h2>Problems This Solution Addresses<a class="headerlink" href="#problems-this-solution-addresses" title="Link to this heading"></a></h2>
+<p><strong>Challenges with Traditional PACS Systems:</strong></p>
+<ul class="simple">
+<li><p>High upfront hardware costs and maintenance expenses</p></li>
+<li><p>System aging and expensive upgrade cycles</p></li>
+<li><p>Complex data protection and disaster recovery requirements</p></li>
+<li><p>Storage capacity limitations and expansion costs</p></li>
+<li><p>IT staffing challenges and operational burden</p></li>
+</ul>
+<p><strong>Solutions Provided by StoreSCP:</strong></p>
+<ul class="simple">
+<li><p>Dramatically reduce initial investment (no hardware required)</p></li>
+<li><p>Pay-as-you-go pricing model for cost optimization</p></li>
+<li><p>Data protection with AWS’s highly reliable infrastructure</p></li>
+<li><p>Unlimited storage capacity with automatic scaling</p></li>
+<li><p>Reduced operational burden through managed services</p></li>
+</ul>
+</section>
+<section id="target-healthcare-organizations">
+<h2>Target Healthcare Organizations<a class="headerlink" href="#target-healthcare-organizations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Small to Medium Hospitals</strong>: Want to implement PACS with minimal initial investment</p></li>
+<li><p><strong>Large Hospitals</strong>: Considering cloud migration of existing systems</p></li>
+<li><p><strong>Radiology Clinics</strong>: Need cost-effective image management solutions</p></li>
+<li><p><strong>Telemedicine Providers</strong>: Require flexible cloud-based access</p></li>
+<li><p><strong>Healthcare IT Vendors</strong>: Want to offer cloud PACS solutions to customers</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>AWS Account</p></li>
+<li><p>Appropriate IAM permissions</p></li>
+<li><p>VPC (existing or new)</p></li>
+<li><p>NAT Gateway (for ECR access from private subnets)</p></li>
+</ul>
+</section>
+<section id="supported-regions">
+<h2>Supported Regions<a class="headerlink" href="#supported-regions" title="Link to this heading"></a></h2>
+<p>Regions where AWS HealthImaging is supported:</p>
+<ul class="simple">
+<li><p>us-east-1 (N. Virginia)</p></li>
+<li><p>us-west-2 (Oregon)</p></li>
+<li><p>eu-west-1 (Ireland)</p></li>
+<li><p>ap-southeast-2 (Sydney)</p></li>
+</ul>
+</section>
+<section id="pricing">
+<h2>Pricing<a class="headerlink" href="#pricing" title="Link to this heading"></a></h2>
+<section id="aws-service-costs">
+<h3>AWS Service Costs<a class="headerlink" href="#aws-service-costs" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>ECS Fargate: Charged based on execution time</p></li>
+<li><p>AWS HealthImaging: Charged based on storage and API usage</p></li>
+<li><p>Lambda: Charged based on execution count and duration</p></li>
+<li><p>Other AWS Services: Standard pricing</p></li>
+</ul>
+<p>For detailed cost estimates, use the <a class="reference external" href="https://calculator.aws">AWS Pricing Calculator</a>.</p>
+</section>
+</section>
+<section id="security-considerations">
+<h2>Security Considerations<a class="headerlink" href="#security-considerations" title="Link to this heading"></a></h2>
+<section id="data-protection">
+<h3>Data Protection<a class="headerlink" href="#data-protection" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Encryption at rest (S3, DynamoDB)</p></li>
+<li><p>Encryption in transit (TLS support)</p></li>
+<li><p>Communication isolation within VPC</p></li>
+</ul>
+</section>
+<section id="access-control">
+<h3>Access Control<a class="headerlink" href="#access-control" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>IAM role-based access control</p></li>
+<li><p>Network control with security groups</p></li>
+</ul>
+</section>
+<section id="compliance">
+<h3>Compliance<a class="headerlink" href="#compliance" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>HIPAA-ready design</p></li>
+<li><p>Security based on AWS Shared Responsibility Model</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This solution is not a medical device. Do not use for medical diagnosis or treatment decisions.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="DICOM Store SCP for AWS HealthImaging Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="deployment.html" class="btn btn-neutral float-right" title="Deployment Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Man Machine Interface, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWS Marketplace Deployment &mdash; DICOM Store SCP for AWS HealthImaging 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DICOM Store SCP for AWS HealthImaging
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Product Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DICOM Store SCP for AWS HealthImaging</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">AWS Marketplace Deployment</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/marketplace.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="aws-marketplace-deployment">
+<h1>AWS Marketplace Deployment<a class="headerlink" href="#aws-marketplace-deployment" title="Link to this heading"></a></h1>
+<section id="deployment-steps">
+<h2>Deployment Steps<a class="headerlink" href="#deployment-steps" title="Link to this heading"></a></h2>
+<section id="launch-from-aws-marketplace">
+<h3>1. Launch from AWS Marketplace<a class="headerlink" href="#launch-from-aws-marketplace" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Search for “DICOM Store SCP” or “StoreSCP” in AWS Marketplace</p></li>
+<li><p>Click “Continue to Subscribe”</p></li>
+<li><p>Click “Continue to Configuration”</p></li>
+<li><p>Select region and click “Continue to Launch”</p></li>
+</ol>
+</section>
+<section id="parameter-configuration">
+<h3>2. Parameter Configuration<a class="headerlink" href="#parameter-configuration" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Configure required parameters:</p>
+<ul class="simple">
+<li><p>VPC ID</p></li>
+<li><p>Subnet IDs</p></li>
+<li><p>Security Group ID</p></li>
+<li><p>Allowed client CIDRs</p></li>
+</ul>
+</li>
+<li><p>Adjust optional parameters as needed</p></li>
+<li><p>Click “Launch”</p></li>
+</ol>
+</section>
+<section id="verify-deployment">
+<h3>3. Verify Deployment<a class="headerlink" href="#verify-deployment" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Confirm CloudFormation stack creation completion</p></li>
+<li><p>Verify ECS service is running properly</p></li>
+<li><p>Obtain Network Load Balancer DNS name</p></li>
+</ul>
+</section>
+</section>
+<section id="id1">
+<h2>Parameter Configuration<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<section id="network-configuration">
+<h3>Network Configuration<a class="headerlink" href="#network-configuration" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VpcID</p></td>
+<td><p>ID of the VPC to use</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>PublicSubnetIDs</p></td>
+<td><p>Public subnet IDs (comma-separated)</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>PrivateSubnetIDs</p></td>
+<td><p>Private subnet IDs (comma-separated)</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>SecurityGroupID</p></td>
+<td><p>Security group ID for ECS service</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>VpcCIDR</p></td>
+<td><p>CIDR block for the VPC</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dicom-configuration">
+<h3>DICOM Configuration<a class="headerlink" href="#dicom-configuration" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SCPAETitle</p></td>
+<td><p>AE Title for DICOM SCP</p></td>
+<td><p>STORESCP</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCPPort</p></td>
+<td><p>DICOM communication port</p></td>
+<td><p>11112</p></td>
+</tr>
+<tr class="row-even"><td><p>PeerCIDR1-3</p></td>
+<td><p>Allowed client CIDR blocks</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>DIMSETimeout</p></td>
+<td><p>DIMSE operation timeout (seconds)</p></td>
+<td><p>60</p></td>
+</tr>
+<tr class="row-even"><td><p>MaximumAssociations</p></td>
+<td><p>Maximum concurrent connections</p></td>
+<td><p>300</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="performance-configuration">
+<h3>Performance Configuration<a class="headerlink" href="#performance-configuration" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TaskCPU</p></td>
+<td><p>CPU units for ECS task</p></td>
+<td><p>1024</p></td>
+</tr>
+<tr class="row-odd"><td><p>TaskMemoryLimit</p></td>
+<td><p>Memory limit for ECS task</p></td>
+<td><p>2048</p></td>
+</tr>
+<tr class="row-even"><td><p>TaskDesiredCount</p></td>
+<td><p>Desired number of ECS tasks</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>AutoscaleMaxCapacity</p></td>
+<td><p>Maximum autoscaling capacity</p></td>
+<td><p>3</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="security-configuration">
+<h3>Security Configuration<a class="headerlink" href="#security-configuration" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TLSCertificateARN</p></td>
+<td><p>TLS certificate ARN (optional)</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="dicom-client-configuration">
+<h3>DICOM Client Configuration<a class="headerlink" href="#dicom-client-configuration" title="Link to this heading"></a></h3>
+<p>Use the information retrieved from CloudFormation Outputs tab:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Host: [NetworkLoadBalancerDNS value]
+Port: [DICOMPort value]
+AE Title: [DICOMAETitle value]
+</pre></div>
+</div>
+</section>
+<section id="image-transmission">
+<h3>Image Transmission<a class="headerlink" href="#image-transmission" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Connect from DICOM client using above settings</p></li>
+<li><p>Send DICOM images using C-STORE operation</p></li>
+<li><p>Automatic import to AWS HealthImaging begins</p></li>
+</ol>
+</section>
+<section id="processing-status-check">
+<h3>Processing Status Check<a class="headerlink" href="#processing-status-check" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Check import status in DynamoDB table</p></li>
+<li><p>Review debug information in CloudWatch Logs</p></li>
+</ul>
+</section>
+</section>
+<section id="monitoring">
+<h2>Monitoring<a class="headerlink" href="#monitoring" title="Link to this heading"></a></h2>
+<section id="cloudwatch-metrics">
+<h3>CloudWatch Metrics<a class="headerlink" href="#cloudwatch-metrics" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>ECS CPU/Memory utilization</p></li>
+<li><p>Network Load Balancer connection count</p></li>
+<li><p>Lambda function execution count and error rate</p></li>
+<li><p>Step Functions execution status</p></li>
+</ul>
+</section>
+<section id="recommended-alarms">
+<h3>Recommended Alarms<a class="headerlink" href="#recommended-alarms" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- ECS CPU utilization &gt; 80%
+- ECS Memory utilization &gt; 80%
+- Lambda error rate &gt; 5%
+- HealthImaging import errors
+</pre></div>
+</div>
+</section>
+</section>
+<section id="post-deployment-configuration">
+<h2>Post-Deployment Configuration<a class="headerlink" href="#post-deployment-configuration" title="Link to this heading"></a></h2>
+<section id="retrieve-connection-information">
+<h3>Retrieve Connection Information<a class="headerlink" href="#retrieve-connection-information" title="Link to this heading"></a></h3>
+<p>After deployment completion:</p>
+<ol class="arabic simple">
+<li><p>AWS Management Console → CloudFormation</p></li>
+<li><p>Select your created stack</p></li>
+<li><p>Click the <strong>Outputs</strong> tab</p></li>
+<li><p>Note the connection information</p></li>
+</ol>
+</section>
+<section id="connection-testing">
+<h3>Connection Testing<a class="headerlink" href="#connection-testing" title="Link to this heading"></a></h3>
+<p><strong>DICOM Echo Test</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>echoscu<span class="w"> </span>-aec<span class="w"> </span>STORESCP<span class="w"> </span>-aet<span class="w"> </span>WORKSTATION1<span class="w"> </span><span class="o">[</span>NLB-DNS<span class="o">]</span><span class="w"> </span><span class="m">11112</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Man Machine Interface, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
