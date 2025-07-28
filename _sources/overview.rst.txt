@@ -55,13 +55,99 @@ Regions where AWS HealthImaging is supported:
 Pricing
 -------
 
-AWS Service Costs
-~~~~~~~~~~~~~~~~~
+AWS Service Components and Costs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ECS Fargate: Charged based on execution time
-- AWS HealthImaging: Charged based on storage and API usage
-- Lambda: Charged based on execution count and duration
-- Other AWS Services: Standard pricing
+The following table details all AWS components deployed by this solution and their associated costs:
+
+**Primary Cost Components**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 15 20 40
+
+   * - Service
+     - Quantity
+     - Billing Model
+     - Description
+   * - **ECS Fargate**
+     - 1-3 tasks
+     - CPU/Memory hours
+     - DICOM SCP server (1024 CPU, 2048MB default)
+   * - **Network Load Balancer**
+     - 1 instance
+     - Hourly + data processing
+     - Internet-facing load balancer
+   * - **AWS HealthImaging**
+     - 1 datastore
+     - Storage + API calls
+     - Medical image storage and management
+   * - **S3 Storage**
+     - 3 buckets
+     - Storage volume
+     - DICOM files, access logs, import results
+   * - **DynamoDB**
+     - 1 table
+     - On-demand requests
+     - Import job metadata (PAY_PER_REQUEST)
+
+**Supporting Components**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 15 20 40
+
+   * - Service
+     - Quantity
+     - Billing Model
+     - Description
+   * - **Lambda Functions**
+     - 3 functions
+     - Execution count/duration
+     - Import workflow automation
+   * - **Step Functions**
+     - 1 state machine
+     - State transitions
+     - Workflow orchestration
+   * - **SQS Queues**
+     - 3 queues
+     - Message count
+     - Event processing and error handling
+   * - **CloudWatch Logs**
+     - Multiple log groups
+     - Log storage volume
+     - Application and system logs
+
+Cost Estimation Examples
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Small Hospital (100-500 images/month)**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Component
+     - Monthly Cost (USD)
+     - Notes
+   * - ECS Fargate (1 task)
+     - $30-40
+     - 1024 CPU, 2048MB, 24/7 operation
+   * - Network Load Balancer
+     - $16-20
+     - Base hourly rate + minimal data processing
+   * - AWS HealthImaging
+     - $5-15
+     - Storage + API calls for 100-500 images
+   * - S3 Storage
+     - $2-5
+     - DICOM files and logs
+   * - Other Services
+     - $5-10
+     - Lambda, DynamoDB, SQS, CloudWatch
+   * - **Total Estimate**
+     - **$60-90**
+     - Varies based on actual usage
 
 For detailed cost estimates, use the `AWS Pricing Calculator <https://calculator.aws>`_.
 
