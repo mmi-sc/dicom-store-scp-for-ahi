@@ -45,12 +45,11 @@ Prerequisites
 Supported Regions
 -----------------
 
-Regions where AWS HealthImaging is supported:
+This solution is designed for deployment in **us-east-1 (N. Virginia)** via AWS Marketplace.
 
-- us-east-1 (N. Virginia)
-- us-west-2 (Oregon)
-- eu-west-1 (Ireland)
-- ap-southeast-2 (Sydney)
+.. note::
+   While AWS HealthImaging is available in multiple regions (us-west-2, eu-west-1, ap-southeast-2),
+   this AWS Marketplace solution currently supports us-east-1 only due to container image hosting limitations.
 
 Pricing
 -------
