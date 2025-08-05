@@ -17,6 +17,7 @@
       <script src="_static/documentation_options.js?v=8d563738"></script>
       <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/image-modal.js?v=2ad10abf"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -240,11 +241,11 @@ Description: Internet DICOM SCP connection
 <ul class="simple">
 <li><p>Enter “DICOM Store SCP for AWS HealthImaging” or “StoreSCP” in the search bar</p></li>
 <li><p>Select the corresponding product</p></li>
+<li><p>Click “View purchase options”</p></li>
 </ul>
 </li>
 <li><p><strong>Subscribe</strong></p>
 <ul class="simple">
-<li><p>Click “Continue to Subscribe”</p></li>
 <li><p>Review and accept terms by clicking “Accept Terms”</p></li>
 <li><p>Wait for subscription processing to complete</p></li>
 </ul>
@@ -259,23 +260,23 @@ Description: Internet DICOM SCP connection
 <li><p>Click “Continue to Configuration”</p></li>
 </ul>
 </li>
-<li><p><strong>Basic Configuration</strong></p>
+<li><p><strong>Setup Configuration</strong></p>
 <ul class="simple">
-<li><p><strong>Region</strong>: Select deployment region</p></li>
-<li><p><strong>Version</strong>: Select latest version</p></li>
-<li><p>Click “Continue to Launch”</p></li>
-</ul>
-</li>
-<li><p><strong>Launch Configuration</strong></p>
-<ul class="simple">
-<li><p><strong>Action</strong>: Select “Launch CloudFormation”</p></li>
-<li><p>Click “Launch”</p></li>
+<li><p><strong>Service</strong>: Select ECS</p></li>
+<li><p><strong>Version</strong>: Select the latest stable version</p></li>
+<li><p>Click the link of Deployment templates</p></li>
 </ul>
 </li>
 </ol>
 </section>
 <section id="step-3-cloudformation-parameter-configuration">
 <h3>Step 3: CloudFormation Parameter Configuration<a class="headerlink" href="#step-3-cloudformation-parameter-configuration" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id1">
+<img alt="CloudFormation - Quick create stack" src="_images/cloudformation_quick-create-stack.png" />
+<figcaption>
+<p><span class="caption-text">CloucFormation - Quick create stack</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 <section id="required-parameters">
 <h4>Required Parameters<a class="headerlink" href="#required-parameters" title="Link to this heading"></a></h4>
 <p><strong>Network Configuration</strong></p>
@@ -357,9 +358,11 @@ Description: Internet DICOM SCP connection
 <section id="step-4-execute-deployment">
 <h3>Step 4: Execute Deployment<a class="headerlink" href="#step-4-execute-deployment" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>Parameter Verification</strong></p>
+<li><p><strong>Acknowledge Capabilities</strong></p>
 <ul class="simple">
-<li><p>Confirm all required parameters are correctly configured</p></li>
+<li><p>Scroll down to the “Capabilities” section at the bottom of the page</p></li>
+<li><p>Check the box “I acknowledge that AWS CloudFormation might create IAM resources.”</p></li>
+<li><p>This is required because the template creates IAM roles and policies</p></li>
 </ul>
 </li>
 <li><p><strong>CloudFormation Stack Creation</strong></p>

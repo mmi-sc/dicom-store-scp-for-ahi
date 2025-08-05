@@ -130,10 +130,10 @@ Step 1: Subscribe on AWS Marketplace
    
    - Enter "DICOM Store SCP for AWS HealthImaging" or "StoreSCP" in the search bar
    - Select the corresponding product
+   - Click "View purchase options"
 
 3. **Subscribe**
    
-   - Click "Continue to Subscribe"
    - Review and accept terms by clicking "Accept Terms"
    - Wait for subscription processing to complete
 
@@ -144,19 +144,20 @@ Step 2: Configuration and Deployment
    
    - Click "Continue to Configuration"
 
-2. **Basic Configuration**
+2. **Setup Configuration**
    
-   - **Region**: Select deployment region
-   - **Version**: Select latest version
-   - Click "Continue to Launch"
-
-3. **Launch Configuration**
-   
-   - **Action**: Select "Launch CloudFormation"
-   - Click "Launch"
+   - **Service**: Select ECS
+   - **Version**: Select the latest stable version
+   - Click the link of Deployment templates
 
 Step 3: CloudFormation Parameter Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: _static/cloudformation_quick-create-stack.png
+   :alt: CloudFormation - Quick create stack
+   :align: center
+
+   CloucFormation - Quick create stack
 
 Required Parameters
 ^^^^^^^^^^^^^^^^^^^
@@ -224,9 +225,11 @@ Required Parameters
 Step 4: Execute Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. **Parameter Verification**
+1. **Acknowledge Capabilities**
    
-   - Confirm all required parameters are correctly configured
+   - Scroll down to the "Capabilities" section at the bottom of the page
+   - Check the box "I acknowledge that AWS CloudFormation might create IAM resources."
+   - This is required because the template creates IAM roles and policies
 
 2. **CloudFormation Stack Creation**
    

@@ -17,6 +17,7 @@
       <script src="_static/documentation_options.js?v=8d563738"></script>
       <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/image-modal.js?v=2ad10abf"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -117,24 +118,12 @@
 <h2>System Architecture<a class="headerlink" href="#system-architecture" title="Link to this heading"></a></h2>
 <section id="high-level-architecture-diagram">
 <h3>High-Level Architecture Diagram<a class="headerlink" href="#high-level-architecture-diagram" title="Link to this heading"></a></h3>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   DICOM Client  │───▶│  Network Load    │───▶│   ECS Fargate   │
-│                 │    │   Balancer       │    │   PACS Server   │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                                                        │
-                                                        ▼
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│  AWS Health     │◀───│  Step Functions  │◀───│   S3 Bucket     │
-│  Imaging        │    │   Workflow       │    │   (DICOM)       │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-         │                       │
-         ▼                       ▼
-┌─────────────────┐    ┌──────────────────┐
-│   S3 Bucket     │    │    DynamoDB      │
-│  (Results)      │    │   (Metadata)     │
-└─────────────────┘    └──────────────────┘
-</pre></div>
-</div>
+<figure class="align-center" id="id1">
+<img alt="DICOM Store SCP for AWS HealthImaging Architecture" src="_images/cloud-pacs-20250425.png" />
+<figcaption>
+<p><span class="caption-text">Click to view larger image</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
 </section>
 </section>
 <section id="core-components">
