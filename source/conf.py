@@ -31,6 +31,7 @@ exclude_patterns = []
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 html_baseurl = 'https://www.mmi-sc.co.jp/dicom-store-scp-for-ahi/'
+html_js_files = ['image-modal.js']
 
 # -- Internationalization options --------------------------------------------
 language = 'en'

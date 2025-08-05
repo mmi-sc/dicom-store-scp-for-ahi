@@ -7,24 +7,11 @@ System Architecture
 High-Level Architecture Diagram
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: text
-
-   ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-   │   DICOM Client  │───▶│  Network Load    │───▶│   ECS Fargate   │
-   │                 │    │   Balancer       │    │   PACS Server   │
-   └─────────────────┘    └──────────────────┘    └─────────────────┘
-                                                           │
-                                                           ▼
-   ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-   │  AWS Health     │◀───│  Step Functions  │◀───│   S3 Bucket     │
-   │  Imaging        │    │   Workflow       │    │   (DICOM)       │
-   └─────────────────┘    └──────────────────┘    └─────────────────┘
-            │                       │                       
-            ▼                       ▼                       
-   ┌─────────────────┐    ┌──────────────────┐              
-   │   S3 Bucket     │    │    DynamoDB      │              
-   │  (Results)      │    │   (Metadata)     │              
-   └─────────────────┘    └──────────────────┘              
+.. figure:: _static/cloud-pacs-20250425.png
+   :alt: DICOM Store SCP for AWS HealthImaging Architecture
+   :align: center
+   
+   Click to view larger image              
 
 Core Components
 ---------------
