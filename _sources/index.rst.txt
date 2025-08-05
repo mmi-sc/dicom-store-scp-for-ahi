@@ -31,4 +31,7 @@ For technical support and questions:
 - AWS HealthImaging Documentation: https://docs.aws.amazon.com/healthimaging/
 - DICOM Standard Specification: https://www.dicomstandard.org/
 
+.. note::
+   This product is not a medical device.
 
+   It is designed to help healthcare institutions manage medical imaging data efficiently and enhance the quality of patient care. However, it is not intended to replace professional medical advice, diagnosis, or treatment.

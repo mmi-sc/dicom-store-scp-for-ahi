@@ -171,6 +171,3 @@ Compliance
 
 - HIPAA-ready design
 - Security based on AWS Shared Responsibility Model
-
-.. note::
-   This solution is not a medical device. Do not use for medical diagnosis or treatment decisions.
