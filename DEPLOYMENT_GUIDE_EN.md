@@ -166,13 +166,13 @@ Description: Internet DICOM SCP connection
 
 | Parameter | Description | Example | Recommended Value |
 |-----------|-------------|---------|-------------------|
-| SCPAETitle | DICOM device identifier | MYHOSPITAL | Hospital abbreviation (max 16 chars) |
+| SCPAETitle | DICOM device identifier | STORESCP | Hospital abbreviation (max 16 chars) |
 | SCPPort | DICOM communication port | 11112 | Keep default value |
 | PeerCIDR1 | Allowed IP address range 1 | 203.0.113.0/24 | Hospital's global IP range |
 | PeerCIDR2 | Allowed IP address range 2 | "" | Additional IP range (optional) |
 | PeerCIDR3 | Allowed IP address range 3 | "" | Additional IP range (optional) |
-| RequireCalledAETitle | Enable AE Title verification | false | Usually false |
-| RequireCallingAETitle | Allowed client AE Titles | "" | Set when restricting to specific devices |
+| DIMSETimeout | DIMSE operation timeout (seconds) | 60 | 60 |
+| MaximumAssociations | Maximum concurrent connections | 300 | 300 |
 
 #### Optional Parameters
 

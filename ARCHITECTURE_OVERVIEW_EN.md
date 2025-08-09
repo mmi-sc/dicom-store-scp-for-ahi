@@ -376,6 +376,19 @@ Private Subnets:
 - **ECS Fargate**: Pay-per-use pricing model
 - **DynamoDB**: On-demand billing for unpredictable traffic
 
+## Monitoring and Observability
+
+### CloudWatch Integration
+- **Metrics**:
+  - ECS: CPU/Memory utilization
+  - NLB: Connection count, response time
+  - Lambda: Execution count, error rate, execution time
+  - Step Functions: Execution status
+- **Logs**:
+  - ECS: Application logs
+  - Lambda: Execution logs
+  - VPC: Flow logs
+
 ---
 
 This architecture enables a scalable, secure, and highly available DICOM Store SCP system on AWS.

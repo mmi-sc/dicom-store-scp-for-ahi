@@ -124,7 +124,7 @@ AWS HealthImagingがサポートしているリージョン:
 ## デプロイ手順
 
 ### 1. AWS Marketplaceからの起動
-1. AWS Marketplaceで「CloudPACS」を検索
+1. AWS Marketplaceで「DICOM Store SCP」または「StoreSCP」を検索
 2. 「Continue to Subscribe」をクリック
 3. 「Continue to Configuration」をクリック
 4. リージョンを選択し、「Continue to Launch」をクリック

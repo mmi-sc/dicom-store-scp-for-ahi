@@ -376,6 +376,19 @@ Private Subnets:
 - **ECS Fargate**: 従量課金モデル
 - **DynamoDB**: 予測困難なトラフィック向けオンデマンド課金
 
+## 監視・観測性
+
+### CloudWatch統合
+- **メトリクス**:
+  - ECS: CPU/Memory使用率
+  - NLB: 接続数、レスポンス時間
+  - Lambda: 実行回数、エラー率、実行時間
+  - Step Functions: 実行状況
+- **ログ**:
+  - ECS: アプリケーションログ
+  - Lambda: 実行ログ
+  - VPC: フローログ
+
 ---
 
 このアーキテクチャにより、スケーラブルで安全、かつ高可用性なDICOM Store SCPシステムをAWS上で実現できます。
