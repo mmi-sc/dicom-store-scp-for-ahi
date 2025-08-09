@@ -1,5 +1,7 @@
 # DICOM Store SCP for AWS HealthImaging Documentation
 
+[![AWS MARKETPLACE](https://img.shields.io/badge/AWS%20MARKETPLACE-v1.0.0-orange?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/marketplace/pp/prodview-a5gbqrjog5eww)
+
 This repository contains comprehensive documentation for DICOM Store SCP for AWS HealthImaging, a fully serverless PACS solution built on AWS.
 
 ## Product Overview
