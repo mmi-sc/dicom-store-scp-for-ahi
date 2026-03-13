@@ -25,6 +25,9 @@ Contents:
    overview
    deployment
    architecture
+   security_responsibility
+   network_communication
+   security_architecture_guide
    troubleshooting
 
 Support
