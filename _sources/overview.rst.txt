@@ -4,7 +4,7 @@ Product Overview
 What is DICOM Store SCP for AWS HealthImaging?
 -----------------------------------------------
 
-DICOM Store SCP for AWS HealthImaging (StoreSCP) is a solution for healthcare institutions to securely and efficiently manage DICOM images from medical devices such as CT, MRI, and X-ray systems in the AWS cloud.
+DICOM Store SCP for AWS HealthImaging (StoreSCP) is a solution for healthcare institutions to manage DICOM images from medical devices such as CT, MRI, and X-ray systems in the AWS cloud using DICOM ingestion workflows designed to support secure operation.
 
 Problems This Solution Addresses
 --------------------------------
@@ -173,3 +173,5 @@ Compliance
 - Security based on AWS Shared Responsibility Model
 
 For detailed information on security architecture, responsibility boundaries, and network communication, see :doc:`security_responsibility`, :doc:`network_communication`, and :doc:`security_architecture_guide`.
+
+Security, availability, and regulatory compliance depend on the customer's AWS configuration and operational practices.
