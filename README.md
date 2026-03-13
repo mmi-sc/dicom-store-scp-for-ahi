@@ -1,109 +1,138 @@
-# DICOM Store SCP for AWS HealthImaging Documentation
+# DICOM Store SCP for AWS HealthImaging
 
 [![AWS MARKETPLACE](https://img.shields.io/badge/AWS%20MARKETPLACE-v1.0.0-orange?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/marketplace/pp/prodview-a5gbqrjog5eww)
 
-This repository contains comprehensive documentation for DICOM Store SCP for AWS HealthImaging, a fully serverless PACS solution built on AWS.
+DICOM Store SCP for AWS HealthImaging is a serverless DICOM ingestion solution designed to run entirely within a customer's AWS account. It enables healthcare organizations to receive DICOM images using standard DICOM C-STORE operations and automatically import them into AWS HealthImaging.
 
-## Product Overview
+The solution uses AWS managed services such as Amazon ECS Fargate, AWS Step Functions, AWS Lambda, Amazon S3, and Amazon DynamoDB to implement scalable DICOM ingestion workflows.
 
-DICOM Store SCP for AWS HealthImaging (StoreSCP) is a solution for healthcare institutions to securely and efficiently manage DICOM images from medical devices such as CT, MRI, and X-ray systems in the AWS cloud.
+This project is designed to help healthcare organizations manage medical imaging data efficiently within AWS environments.
 
-### Key Features
+---
 
-- **DICOM SCP Server**: Fully compliant DICOM Service Class Provider
-- **AWS HealthImaging Integration**: Seamless integration with AWS HealthImaging datastore
-- **Serverless Architecture**: Built on AWS Lambda, ECS Fargate, and Step Functions
-- **Auto Scaling**: Automatic scaling based on workload
-- **Security**: VPC isolation, encryption at rest and in transit
+## Key Features
 
-### Target Healthcare Organizations
+- Serverless architecture based on Amazon ECS Fargate
+- Automated DICOM ingestion workflows
+- Native integration with AWS HealthImaging
+- Deployment within the customer's AWS account and VPC
+- Support for standard DICOM C-STORE operations
+- Integration with AWS managed services for orchestration and storage
 
-- **Small to Medium Hospitals**: Want to implement PACS with minimal initial investment
-- **Large Hospitals**: Considering cloud migration of existing systems
-- **Radiology Clinics**: Need cost-effective image management solutions
-- **Telemedicine Providers**: Require flexible cloud-based access
-- **Healthcare IT Vendors**: Want to offer cloud PACS solutions to customers
+---
 
-## Pre-Deployment Preparation
+## Architecture Overview
 
-### Prerequisites
+The system uses AWS managed services to provide a scalable architecture for receiving and processing DICOM data.
 
-- AWS Account with appropriate IAM permissions
-- VPC with public and private subnets
-- NAT Gateway (for ECR access from private subnets)
-- Security Groups configured for DICOM communication
+Core components include:
 
-### Supported Regions
+- Amazon ECS Fargate (DICOM Store SCP service)
+- Network Load Balancer
+- Amazon S3 for temporary DICOM storage
+- AWS Step Functions for workflow orchestration
+- AWS Lambda for processing tasks
+- Amazon DynamoDB for job tracking
+- AWS HealthImaging datastore for medical imaging storage
 
-Regions where AWS HealthImaging is supported:
+A detailed architecture description is available in the documentation site.
 
-- us-east-1 (N. Virginia)
-- us-west-2 (Oregon)
-- eu-west-1 (Ireland)
-- ap-southeast-2 (Sydney)
+---
 
-## Deployment Steps
+## Deployment
 
-### Quick Deployment via AWS Marketplace
+The solution is deployed using AWS CloudFormation.
 
-1. **Subscribe on AWS Marketplace**
-   - Search for "DICOM Store SCP" in AWS Marketplace
-   - Click "Continue to Subscribe" and accept terms
+Typical deployment flow:
 
-2. **Configure Parameters**
-   - Set VPC and subnet configurations
-   - Configure DICOM settings (AE Title, allowed CIDRs)
-   - Adjust performance parameters as needed
+1. Prepare AWS HealthImaging datastore
+2. Deploy the CloudFormation stack
+3. Configure AE Titles and networking
+4. Connect DICOM modalities or PACS systems
+5. Start ingesting DICOM images into AWS HealthImaging
 
-3. **Deploy via CloudFormation**
-   - Launch CloudFormation stack
-   - Monitor deployment progress (typically 10-15 minutes)
-   - Retrieve connection information from Outputs tab
+Detailed deployment instructions are available in the documentation.
 
-## Documentation Structure
+---
 
-### Architecture and Design
-- [Architecture Overview (English)](ARCHITECTURE_OVERVIEW_EN.md)
-- [Architecture Overview (Japanese)](ARCHITECTURE_OVERVIEW.md)
+## Security Responsibility
 
-### Deployment Guides
-- [Deployment Guide (English)](DEPLOYMENT_GUIDE_EN.md)
-- [Deployment Guide (Japanese)](DEPLOYMENT_GUIDE.md)
+This solution follows a shared responsibility model similar to AWS services.
 
-### AWS Marketplace
-- [Marketplace Documentation (English)](MARKETPLACE_DOCUMENTATION_EN.md)
-- [Marketplace Documentation (Japanese)](MARKETPLACE_DOCUMENTATION.md)
+Vendor responsibilities include:
 
-### API Documentation
-- [Sphinx Documentation](docs/build/html/index.html) - Comprehensive technical documentation
+- Providing the software container image
+- Providing deployment templates
+- Publishing documentation and architecture guidance
 
-## Quick Start
+Customer responsibilities include:
 
-After deployment, configure your DICOM devices with:
+- Operating infrastructure within their AWS account
+- Managing IAM policies and network configuration
+- Configuring encryption, monitoring, and logging
+- Managing regulatory and organizational compliance requirements
 
-```
-Host: [NetworkLoadBalancerDNS from CloudFormation Outputs]
-Port: 11112
-AE Title: STORESCP (or your configured value)
-```
+The vendor does not operate or manage customer AWS environments.
 
-## Support
+---
 
-- **AWS HealthImaging Documentation**: https://docs.aws.amazon.com/healthimaging/
-- **DICOM Standard**: https://www.dicomstandard.org/
-- **Technical Support**: Submit requests through AWS Marketplace
+## Network Communication
+
+The software operates entirely within the customer's AWS account and VPC.
+
+DICOM data is received through the standard DICOM C-STORE protocol and processed using AWS services configured by the customer.
+
+The software does not transmit customer data outside the customer's AWS account except when interacting with AWS services configured by the customer.
+
+---
+
+## Support Policy
+
+Community support is provided through the GitHub repository.
+
+Users may submit questions or report issues through the GitHub issues page.
+
+The vendor does not operate or manage customer AWS environments. Customers are responsible for operating and maintaining their own infrastructure.
+
+---
+
+## Documentation
+
+Full documentation is available at:
+
+https://www.mmi-sc.co.jp/dicom-store-scp-for-ahi/
+
+Documentation includes:
+
+- Product Overview
+- Deployment Guide
+- Architecture Overview
+- Security Responsibility
+- Network Communication
+- Security and Architecture Guide
+- Support Policy
+- Troubleshooting Guide
+
+---
 
 ## Security Notice
 
-This solution is designed for healthcare environments and includes:
+This project is designed to support secure healthcare workloads on AWS. Security, availability, and regulatory compliance depend on the customer's AWS configuration and operational practices.
 
-- Architecture designed to support secure healthcare workloads on AWS
-- Encryption at rest and in transit
-- VPC isolation and security groups
-- Audit logging capabilities
+---
 
-**Important**: This solution is not a medical device. Do not use for medical diagnosis or treatment decisions.
+## License
 
-## Version History
+See LICENSE file for details.
 
-- **v1.0.0**: Initial release with basic DICOM SCP functionality and AWS HealthImaging integration
+---
+
+## Contributing
+
+Contributions and issue reports are welcome through GitHub.
+
+---
+
+## Disclaimer
+
+This software is not a medical device and is not intended for diagnostic use.
