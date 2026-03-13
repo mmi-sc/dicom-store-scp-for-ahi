@@ -40,7 +40,7 @@ DICOM Store SCP for AWS HealthImaging (StoreSCP) is a solution for healthcare in
 ### ☁️ AWS HealthImaging Integration
 - Complete integration with AWS HealthImaging datastore
 - Automated DICOM import processing
-- High availability and scalability
+- Scalable and resilient design
 
 ### 🔧 Full Automation
 - Workflow automation with Step Functions

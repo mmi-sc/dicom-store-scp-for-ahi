@@ -371,7 +371,7 @@ AWS Management Console → ECS → Clusters → [cluster-name] → Services → 
 
 **AWS HealthImaging**
 - Automatic backup by AWS managed service
-- High availability architecture
+- Resilient deployment architecture
 
 ## Operational Best Practices
 

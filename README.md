@@ -97,7 +97,7 @@ AE Title: STORESCP (or your configured value)
 
 This solution is designed for healthcare environments and includes:
 
-- HIPAA-ready architecture
+- Architecture designed to support secure healthcare workloads on AWS
 - Encryption at rest and in transit
 - VPC isolation and security groups
 - Audit logging capabilities

@@ -108,7 +108,7 @@ graph TB
 - **Purpose**: Load balancing and health checking for DICOM communication
 - **Features**:
   - Layer 4 (TCP) load balancing
-  - High availability and scalability
+  - Scalable and resilient design
   - TLS termination support (optional)
 - **Configuration**:
   - Target: ECS Fargate tasks
@@ -172,7 +172,7 @@ Private Subnets:
 - **Purpose**: Long-term storage and management of medical images
 - **Features**:
   - DICOM standard compliant
-  - High availability and durability
+  - Durable storage with AWS-managed infrastructure
   - API-based access
 - **Datastore Configuration**:
   - Encryption: AWS managed encryption
