@@ -28,6 +28,7 @@ Contents:
    security_responsibility
    network_communication
    security_architecture_guide
+   support_policy
    troubleshooting
 
 Support
