@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security and Architecture Guide &mdash; DICOM Store SCP for AWS HealthImaging 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="canonical" href="https://www.mmi-sc.co.jp/dicom-store-scp-for-ahi/security_architecture_guide.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/image-modal.js?v=2ad10abf"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Troubleshooting Guide" href="troubleshooting.html" />
+    <link rel="prev" title="Network Communication" href="network_communication.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DICOM Store SCP for AWS HealthImaging
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Product Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_responsibility.html">Security Responsibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="network_communication.html">Network Communication</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Security and Architecture Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-components">Architecture Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-security-considerations">Key Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recommended-customer-controls">Recommended Customer Controls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compliance-and-regulatory-considerations">Compliance and Regulatory Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DICOM Store SCP for AWS HealthImaging</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Security and Architecture Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/security_architecture_guide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="security-and-architecture-guide">
+<h1>Security and Architecture Guide<a class="headerlink" href="#security-and-architecture-guide" title="Link to this heading"></a></h1>
+<p>This guide provides an overview of the security design and architectural controls implemented in DICOM Store SCP for AWS HealthImaging. It is intended for architecture and security reviewers, compliance teams, and technical decision-makers evaluating the solution.</p>
+<p>The information presented here summarizes security-relevant aspects of the architecture. This guide does not replace the customer’s own security review, risk assessment, or compliance validation processes.</p>
+<section id="architecture-components">
+<h2>Architecture Components<a class="headerlink" href="#architecture-components" title="Link to this heading"></a></h2>
+<p>The solution is built on the following AWS services:</p>
+<p><strong>Compute and Networking</strong></p>
+<ul class="simple">
+<li><p><strong>Amazon ECS Fargate</strong>: Serverless container execution environment for the DICOM Store SCP server</p></li>
+<li><p><strong>Amazon VPC</strong>: Network isolation with public and private subnets</p></li>
+<li><p><strong>Network Load Balancer</strong>: Layer 4 load balancing for DICOM traffic with optional TLS termination</p></li>
+</ul>
+<p><strong>Storage and Data Management</strong></p>
+<ul class="simple">
+<li><p><strong>Amazon S3</strong>: Object storage for received DICOM files and processing results</p></li>
+<li><p><strong>AWS HealthImaging</strong>: DICOM-compliant medical image storage and management service</p></li>
+<li><p><strong>Amazon DynamoDB</strong>: Metadata storage for import job tracking and status management</p></li>
+</ul>
+<p><strong>Orchestration and Processing</strong></p>
+<ul class="simple">
+<li><p><strong>AWS Lambda</strong>: Serverless functions for workflow automation and event processing</p></li>
+<li><p><strong>AWS Step Functions</strong>: State machine orchestration for DICOM import workflows</p></li>
+</ul>
+<p><strong>Security and Monitoring</strong></p>
+<ul class="simple">
+<li><p><strong>AWS IAM</strong>: Role-based access control for all service interactions</p></li>
+<li><p><strong>Amazon CloudWatch</strong>: Logging and monitoring for operational visibility</p></li>
+<li><p><strong>VPC Flow Logs</strong>: Network traffic visibility and analysis</p></li>
+</ul>
+</section>
+<section id="key-security-considerations">
+<h2>Key Security Considerations<a class="headerlink" href="#key-security-considerations" title="Link to this heading"></a></h2>
+<p><strong>Customer-Managed Deployment</strong></p>
+<p>The solution is deployed entirely within the customer’s AWS account. The vendor does not have access to the customer’s environment, infrastructure, or data. All operational control and data governance remain with the customer.</p>
+<p><strong>Network Isolation</strong></p>
+<p>All components operate within the customer’s VPC. Network traffic is controlled through security groups, network ACLs, and subnet routing. DICOM clients connect through a Network Load Balancer, and internal communication occurs within the VPC.</p>
+<p><strong>IAM-Based Access Control</strong></p>
+<p>All interactions between AWS services use IAM roles with least privilege permissions. The solution does not use long-term credentials or access keys. Customers can review and modify IAM policies to meet their security requirements.</p>
+<p><strong>Encryption in Transit</strong></p>
+<ul class="simple">
+<li><p>DICOM communication can be encrypted using TLS at the Network Load Balancer</p></li>
+<li><p>Communication between AWS services uses AWS-managed encryption</p></li>
+<li><p>Customers configure TLS policies and certificate management</p></li>
+</ul>
+<p><strong>Encryption at Rest</strong></p>
+<ul class="simple">
+<li><p>S3 buckets use server-side encryption with AWS-managed keys (SSE-S3)</p></li>
+<li><p>DynamoDB tables use default encryption</p></li>
+<li><p>AWS HealthImaging uses AWS-managed encryption</p></li>
+<li><p>Customers can configure customer-managed keys (CMK) where supported</p></li>
+</ul>
+<p><strong>Separation of Environments</strong></p>
+<p>The vendor and customer environments are completely separated. The vendor provides the container image and deployment templates but does not access customer data, logs, or infrastructure. No telemetry or usage data is collected by the vendor.</p>
+<p><strong>Logging and Operational Visibility</strong></p>
+<p>CloudWatch Logs, VPC Flow Logs, and service-level logging provide visibility into system operations. Customers configure log retention, analysis, and alerting according to their operational and compliance requirements.</p>
+</section>
+<section id="recommended-customer-controls">
+<h2>Recommended Customer Controls<a class="headerlink" href="#recommended-customer-controls" title="Link to this heading"></a></h2>
+<p>Customers should implement the following controls as part of their deployment and operational practices:</p>
+<p><strong>Network Security</strong></p>
+<ul class="simple">
+<li><p>Review and configure security groups to allow DICOM traffic only from trusted sources</p></li>
+<li><p>Restrict inbound access using CIDR blocks or security group references</p></li>
+<li><p>Enable VPC Flow Logs for network traffic analysis</p></li>
+<li><p>Consider using AWS PrivateLink or VPC endpoints for service communication</p></li>
+</ul>
+<p><strong>Access Management</strong></p>
+<ul class="simple">
+<li><p>Apply least privilege IAM policies to all roles</p></li>
+<li><p>Review IAM permissions before production deployment</p></li>
+<li><p>Use IAM policy conditions to restrict access based on source IP, time, or other factors</p></li>
+<li><p>Enable CloudTrail for API activity logging and auditing</p></li>
+</ul>
+<p><strong>Encryption</strong></p>
+<ul class="simple">
+<li><p>Enable TLS for DICOM communication at the Network Load Balancer</p></li>
+<li><p>Review encryption settings for S3, DynamoDB, and AWS HealthImaging</p></li>
+<li><p>Consider using customer-managed keys (CMK) for additional control over encryption keys</p></li>
+<li><p>Validate that encryption meets organizational and regulatory requirements</p></li>
+</ul>
+<p><strong>Monitoring and Logging</strong></p>
+<ul class="simple">
+<li><p>Enable CloudWatch Logs for all Lambda functions and ECS tasks</p></li>
+<li><p>Configure log retention policies according to compliance requirements</p></li>
+<li><p>Set up CloudWatch alarms for operational and security events</p></li>
+<li><p>Review logs regularly for anomalies or security incidents</p></li>
+</ul>
+<p><strong>Configuration Validation</strong></p>
+<ul class="simple">
+<li><p>Review all CloudFormation parameters before deployment</p></li>
+<li><p>Test the deployment in a non-production environment first</p></li>
+<li><p>Validate security group rules, IAM policies, and network configurations</p></li>
+<li><p>Document configuration decisions and deviations from defaults</p></li>
+</ul>
+<p><strong>Operational Security</strong></p>
+<ul class="simple">
+<li><p>Establish procedures for monitoring import job status and errors</p></li>
+<li><p>Define incident response processes for security events</p></li>
+<li><p>Plan for regular review of IAM permissions and network configurations</p></li>
+<li><p>Keep deployment templates and container images up to date with vendor releases</p></li>
+</ul>
+</section>
+<section id="compliance-and-regulatory-considerations">
+<h2>Compliance and Regulatory Considerations<a class="headerlink" href="#compliance-and-regulatory-considerations" title="Link to this heading"></a></h2>
+<p>This solution is designed with healthcare data security in mind and follows AWS best practices for HIPAA-eligible services. However, customers are responsible for:</p>
+<ul class="simple">
+<li><p>Determining applicability of regulations such as HIPAA, GDPR, or other data protection laws</p></li>
+<li><p>Configuring the solution to meet specific compliance requirements</p></li>
+<li><p>Conducting compliance assessments and audits</p></li>
+<li><p>Maintaining documentation for regulatory review</p></li>
+<li><p>Implementing additional controls as required by their compliance framework</p></li>
+</ul>
+<p>The vendor does not make claims about compliance certifications or regulatory approval. Customers must validate compliance based on their own requirements and risk assessments.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This guide provides architectural and security information to support customer review processes. It does not constitute security advice, legal guidance, or compliance certification. Customers are responsible for their own security review, risk assessment, and compliance validation.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="network_communication.html" class="btn btn-neutral float-left" title="Network Communication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Troubleshooting Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Man Machine Interface, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

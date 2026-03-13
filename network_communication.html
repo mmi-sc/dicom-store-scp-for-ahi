@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Network Communication &mdash; DICOM Store SCP for AWS HealthImaging 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="canonical" href="https://www.mmi-sc.co.jp/dicom-store-scp-for-ahi/network_communication.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/image-modal.js?v=2ad10abf"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Security and Architecture Guide" href="security_architecture_guide.html" />
+    <link rel="prev" title="Security Responsibility" href="security_responsibility.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DICOM Store SCP for AWS HealthImaging
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Product Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_responsibility.html">Security Responsibility</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Network Communication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#deployment-scope">Deployment Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-transmission-boundaries">Data Transmission Boundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#typical-communication-path">Typical Communication Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#operational-notes">Operational Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security_architecture_guide.html">Security and Architecture Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DICOM Store SCP for AWS HealthImaging</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Network Communication</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/network_communication.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="network-communication">
+<h1>Network Communication<a class="headerlink" href="#network-communication" title="Link to this heading"></a></h1>
+<p>This page provides transparency on network traffic flows and data movement within the DICOM Store SCP for AWS HealthImaging deployment. Understanding these communication patterns is essential for security review and network architecture planning.</p>
+<section id="deployment-scope">
+<h2>Deployment Scope<a class="headerlink" href="#deployment-scope" title="Link to this heading"></a></h2>
+<p>The software operates entirely within the customer’s AWS account and VPC. All processing, storage, and data movement occur within AWS services configured and managed by the customer.</p>
+<p>DICOM data is received through standard DICOM C-STORE communication from medical imaging devices or DICOM clients. Once received, all processing occurs within the customer’s AWS environment using services such as ECS Fargate, S3, Lambda, Step Functions, DynamoDB, and AWS HealthImaging.</p>
+</section>
+<section id="data-transmission-boundaries">
+<h2>Data Transmission Boundaries<a class="headerlink" href="#data-transmission-boundaries" title="Link to this heading"></a></h2>
+<p>The software does not transmit customer data outside the customer’s AWS account except when interacting with AWS services configured by the customer. Specifically:</p>
+<ul class="simple">
+<li><p>DICOM images and metadata remain within the customer’s AWS account</p></li>
+<li><p>Processing occurs entirely within the customer’s VPC and AWS services</p></li>
+<li><p>No data is sent to the vendor or any third-party services</p></li>
+<li><p>No telemetry, analytics, or usage tracking data is collected by the vendor</p></li>
+</ul>
+<p>Customers retain full control over network paths, security groups, TLS settings, and VPC configuration. All network communication is governed by the customer’s AWS networking and security policies.</p>
+</section>
+<section id="typical-communication-path">
+<h2>Typical Communication Path<a class="headerlink" href="#typical-communication-path" title="Link to this heading"></a></h2>
+<p>The following describes the standard end-to-end flow for DICOM image ingestion and processing:</p>
+<ol class="arabic simple">
+<li><p><strong>DICOM Client or Modality</strong>: Medical imaging device or PACS system initiates a DICOM C-STORE operation to send images</p></li>
+<li><p><strong>Network Load Balancer</strong>: Receives inbound TCP connections on port 11112 (configurable) and distributes traffic to available ECS tasks</p></li>
+<li><p><strong>ECS Fargate Store SCP</strong>: Processes DICOM protocol communication, validates incoming data, and stores received DICOM objects</p></li>
+<li><p><strong>S3 Bucket</strong>: Stores received DICOM objects temporarily for processing</p></li>
+<li><p><strong>Lambda and Step Functions</strong>: Orchestrate the import workflow, including metadata extraction and job management</p></li>
+<li><p><strong>AWS HealthImaging Datastore</strong>: Stores medical images in a DICOM-compliant format for long-term access</p></li>
+<li><p><strong>DynamoDB</strong>: Tracks import job status, metadata, and processing results</p></li>
+</ol>
+<p>All communication between these components occurs within the customer’s AWS account using AWS service endpoints and VPC networking.</p>
+</section>
+<section id="operational-notes">
+<h2>Operational Notes<a class="headerlink" href="#operational-notes" title="Link to this heading"></a></h2>
+<p><strong>Inbound Access Control</strong></p>
+<ul class="simple">
+<li><p>DICOM clients connect to the Network Load Balancer on a configurable port (default: 11112)</p></li>
+<li><p>Access is controlled by security groups and network ACLs configured by the customer</p></li>
+<li><p>Customers should restrict inbound access to trusted source IP ranges or CIDR blocks</p></li>
+</ul>
+<p><strong>TLS Configuration</strong></p>
+<ul class="simple">
+<li><p>TLS encryption for DICOM communication is supported and can be configured at the Network Load Balancer</p></li>
+<li><p>Customers are responsible for certificate management and TLS policy configuration</p></li>
+<li><p>Encryption in transit between AWS services uses AWS-managed encryption</p></li>
+</ul>
+<p><strong>AWS Service Endpoints</strong></p>
+<ul class="simple">
+<li><p>ECS Fargate tasks communicate with AWS services using VPC endpoints or NAT Gateway</p></li>
+<li><p>S3, Lambda, Step Functions, DynamoDB, and AWS HealthImaging are accessed via AWS service endpoints</p></li>
+<li><p>All service communication remains within the AWS network</p></li>
+</ul>
+<p><strong>Logging and Monitoring</strong></p>
+<ul class="simple">
+<li><p>VPC Flow Logs provide visibility into network traffic patterns</p></li>
+<li><p>CloudWatch Logs capture application and service logs</p></li>
+<li><p>Network Load Balancer access logs can be enabled for connection tracking</p></li>
+<li><p>Customers configure and manage all logging and monitoring settings</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No customer data, telemetry, or usage information is transmitted to the vendor. All data remains within the customer’s AWS account and is subject to the customer’s data governance policies.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="security_responsibility.html" class="btn btn-neutral float-left" title="Security Responsibility" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="security_architecture_guide.html" class="btn btn-neutral float-right" title="Security and Architecture Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Man Machine Interface, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

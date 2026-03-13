@@ -1,0 +1,166 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security Responsibility &mdash; DICOM Store SCP for AWS HealthImaging 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="canonical" href="https://www.mmi-sc.co.jp/dicom-store-scp-for-ahi/security_responsibility.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/image-modal.js?v=2ad10abf"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Network Communication" href="network_communication.html" />
+    <link rel="prev" title="Architecture Overview" href="architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DICOM Store SCP for AWS HealthImaging
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Product Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Security Responsibility</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vendor-responsibilities">Vendor Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customer-responsibilities">Customer Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customer-security-review">Customer Security Review</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="network_communication.html">Network Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_architecture_guide.html">Security and Architecture Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DICOM Store SCP for AWS HealthImaging</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Security Responsibility</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/security_responsibility.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="security-responsibility">
+<h1>Security Responsibility<a class="headerlink" href="#security-responsibility" title="Link to this heading"></a></h1>
+<p>This product follows a shared responsibility model similar to AWS services. Understanding the division of responsibilities between the vendor and the customer is essential for enterprise security review and compliance discussions.</p>
+<p>DICOM Store SCP for AWS HealthImaging is a customer-managed deployment that operates entirely within the customer’s AWS account. The vendor, Man Machine Interface, Inc., does not access the customer’s AWS account, environments, or customer data at any time.</p>
+<section id="vendor-responsibilities">
+<h2>Vendor Responsibilities<a class="headerlink" href="#vendor-responsibilities" title="Link to this heading"></a></h2>
+<p>The vendor is responsible for:</p>
+<ul class="simple">
+<li><p><strong>Product Development</strong>: Providing the container image and deployment templates that implement the DICOM Store SCP functionality.</p></li>
+<li><p><strong>Secure Design</strong>: Designing the software with security considerations and reasonable default configurations.</p></li>
+<li><p><strong>Software Updates</strong>: Providing software updates that may include security fixes for supported releases.</p></li>
+<li><p><strong>Documentation</strong>: Publishing product documentation, deployment guidance, and architectural best practices.</p></li>
+</ul>
+<p>The vendor’s responsibility ends at the delivery of the software artifacts and documentation. The vendor does not operate, monitor, or maintain the deployed infrastructure.</p>
+</section>
+<section id="customer-responsibilities">
+<h2>Customer Responsibilities<a class="headerlink" href="#customer-responsibilities" title="Link to this heading"></a></h2>
+<p>The customer is responsible for:</p>
+<ul class="simple">
+<li><p><strong>Infrastructure Operation</strong>: Operating and maintaining all infrastructure components within their AWS account</p></li>
+<li><p><strong>IAM Management</strong>: Managing IAM roles, policies, and permissions for all deployed resources</p></li>
+<li><p><strong>Network Configuration</strong>: Configuring VPC, subnets, security groups, and network access control lists</p></li>
+<li><p><strong>Encryption Settings</strong>: Configuring encryption at rest and in transit according to their security requirements</p></li>
+<li><p><strong>Logging and Monitoring</strong>: Enabling, configuring, and reviewing CloudWatch logs, VPC Flow Logs, and other monitoring tools</p></li>
+<li><p><strong>Data Governance</strong>: Governing DICOM data, metadata, patient information, and retention policies</p></li>
+<li><p><strong>Compliance Validation</strong>: Validating compliance with applicable legal, regulatory, and organizational requirements</p></li>
+<li><p><strong>Security Review</strong>: Reviewing deployment settings, security configurations, and access controls before production use</p></li>
+<li><p><strong>Operational Security</strong>: Managing security incidents, patching, updates, and ongoing security operations</p></li>
+</ul>
+<p>The customer retains full control over the deployment, configuration, and operation of the solution within their AWS environment.</p>
+</section>
+<section id="customer-security-review">
+<h2>Customer Security Review<a class="headerlink" href="#customer-security-review" title="Link to this heading"></a></h2>
+<p>Customers remain responsible for conducting their own security review of the deployment. This includes:</p>
+<ul class="simple">
+<li><p>Evaluating the solution against internal security policies and standards</p></li>
+<li><p>Assessing compliance with applicable regulations such as HIPAA, GDPR, or other healthcare data protection requirements</p></li>
+<li><p>Reviewing IAM permissions and ensuring least privilege access</p></li>
+<li><p>Validating network configurations and access controls</p></li>
+<li><p>Testing security controls in non-production environments before production deployment</p></li>
+</ul>
+<p>The vendor provides documentation and architectural guidance to support these reviews, but the final security posture and compliance determination rest with the customer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This product does not include vendor access to customer environments or customer data. All operations, monitoring, and data governance are performed by the customer within their own AWS account.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="architecture.html" class="btn btn-neutral float-left" title="Architecture Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="network_communication.html" class="btn btn-neutral float-right" title="Network Communication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Man Machine Interface, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
