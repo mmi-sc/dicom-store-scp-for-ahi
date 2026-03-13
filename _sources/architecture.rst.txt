@@ -23,7 +23,7 @@ Network Load Balancer (NLB)
 - **Features**:
   
   - Layer 4 (TCP) load balancing
-  - High availability and scalability
+  - Scalable and resilient design
   - TLS termination support (optional)
 
 - **Configuration**:
@@ -75,7 +75,7 @@ AWS HealthImaging
 - **Features**:
   
   - DICOM standard compliant
-  - High availability and durability
+  - Durable storage with AWS-managed infrastructure
   - API-based access
 
 - **Configuration**:
@@ -212,7 +212,7 @@ Auto Scaling
 - **Lambda**: Automatic scaling (configurable concurrent execution limits)
 - **DynamoDB**: On-demand capacity (PAY_PER_REQUEST)
 
-High Availability Design
+Resilient Deployment Design
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 - **Multi-AZ**: Distribution across multiple Availability Zones

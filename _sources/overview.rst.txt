@@ -169,7 +169,7 @@ Access Control
 Compliance
 ~~~~~~~~~~
 
-- HIPAA-ready design
+- Architecture designed to support secure healthcare workloads on AWS
 - Security based on AWS Shared Responsibility Model
 
 For detailed information on security architecture, responsibility boundaries, and network communication, see :doc:`security_responsibility`, :doc:`network_communication`, and :doc:`security_architecture_guide`.

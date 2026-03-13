@@ -4,7 +4,7 @@ Deployment Guide
 About This Guide
 ----------------
 
-This guide is a comprehensive deployment manual for healthcare professionals who handle DICOM images and want to build a DICOM image reception system on AWS. Even AWS beginners can safely use this solution by following the detailed step-by-step instructions provided.
+This guide is a comprehensive deployment manual for healthcare professionals who handle DICOM images and want to build a DICOM image reception system on AWS. Even users who are new to AWS can follow the step-by-step instructions to deploy the solution.
 
 Pre-Deployment Preparation
 --------------------------
