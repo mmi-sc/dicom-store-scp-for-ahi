@@ -98,6 +98,8 @@ The vendor does not operate or manage customer AWS environments. Customers are r
 
 ## Documentation
 
+The documentation site is the authoritative source for detailed operational and architectural guidance.
+
 Full documentation is available at:
 
 https://www.mmi-sc.co.jp/dicom-store-scp-for-ahi/
@@ -117,7 +119,7 @@ Documentation includes:
 
 ## Security Notice
 
-This project is designed to support secure healthcare workloads on AWS. Security, availability, and regulatory compliance depend on the customer's AWS configuration and operational practices.
+This project is designed to support healthcare workloads on AWS. Security, availability, and regulatory compliance depend on the customer's AWS configuration and operational practices.
 
 ---
 
