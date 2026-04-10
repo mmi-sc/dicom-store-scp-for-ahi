@@ -5,7 +5,7 @@ DICOM Store SCP for AWS HealthImaging Documentation
    :target: https://aws.amazon.com/marketplace/pp/prodview-a5gbqrjog5eww
    :alt: AWS MARKETPLACE
 
-DICOM Store SCP for AWS HealthImaging (StoreSCP) is a fully serverless PACS (Picture Archiving and Communication System) deployment powered by AWS CloudFormation. It includes a DICOM Store SCP server, HealthImaging Datastore, Import Job automation, and supporting infrastructure components such as Lambda, DynamoDB, and Step Functions.
+DICOM Store SCP for AWS HealthImaging (StoreSCP) is a serverless DICOM ingestion solution powered by AWS CloudFormation. It includes a DICOM Store SCP server, HealthImaging Datastore, Import Job automation, and supporting infrastructure components such as Lambda, DynamoDB, and Step Functions.
 
 Key Features
 ------------

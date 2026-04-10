@@ -28,11 +28,11 @@ Problems This Solution Addresses
 Target Healthcare Organizations
 -------------------------------
 
-- **Small to Medium Hospitals**: Want to implement PACS with minimal initial investment
+- **Small to Medium Hospitals**: Want to implement cloud-based medical imaging with minimal initial investment
 - **Large Hospitals**: Considering cloud migration of existing systems
 - **Radiology Clinics**: Need cost-effective image management solutions
 - **Telemedicine Providers**: Require flexible cloud-based access
-- **Healthcare IT Vendors**: Want to offer cloud PACS solutions to customers
+- **Healthcare IT Vendors**: Want to offer cloud-based medical imaging solutions to customers
 
 Prerequisites
 -------------

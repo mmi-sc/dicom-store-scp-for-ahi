@@ -32,7 +32,7 @@ Network Load Balancer (NLB)
   - Health Check: TCP connection verification
   - Sticky Sessions: Disabled
 
-ECS Fargate PACS Server
+ECS Fargate DICOM SCP Server
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 - **Purpose**: Execution environment for DICOM SCP server
