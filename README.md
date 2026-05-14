@@ -1,6 +1,6 @@
 # DICOM Store SCP for AWS HealthImaging
 
-[![AWS MARKETPLACE](https://img.shields.io/badge/AWS%20MARKETPLACE-v1.0.0-orange?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/marketplace/pp/prodview-a5gbqrjog5eww)
+[![AWS MARKETPLACE](https://img.shields.io/badge/AWS%20MARKETPLACE-v1.1.0-orange?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/marketplace/pp/prodview-a5gbqrjog5eww)
 
 DICOM Store SCP for AWS HealthImaging is a serverless DICOM ingestion solution designed to run entirely within a customer's AWS account. It enables healthcare organizations to receive DICOM images using standard DICOM C-STORE operations and automatically import them into AWS HealthImaging.
 

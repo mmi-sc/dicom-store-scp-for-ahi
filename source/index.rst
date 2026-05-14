@@ -1,7 +1,7 @@
 DICOM Store SCP for AWS HealthImaging Documentation
 ===================================================
 
-.. image:: https://img.shields.io/badge/AWS%20MARKETPLACE-v1.0.0-orange?style=for-the-badge&logo=amazon-aws
+.. image:: https://img.shields.io/badge/AWS%20MARKETPLACE-v1.1.0-orange?style=for-the-badge&logo=amazon-aws
    :target: https://aws.amazon.com/marketplace/pp/prodview-a5gbqrjog5eww
    :alt: AWS MARKETPLACE
 
